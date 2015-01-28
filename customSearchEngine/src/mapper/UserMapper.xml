@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+
+	<resultMap type="User" id="find">
+		<id column="user_id" property="userId" />
+		<id column="phone_num" property="phoneNum" />
+		<id column="shop_num" property="shopNum" />
+	</resultMap>
+
+
+	<insert id="insertUser" parameterType="User">
+		insert into
+		user_list(user_id,pw,name,phone_num)
+		values(#{userId},#{pw},#{name},#{phoneNum})
+	</insert>
+	<insert id="insertRandomShopUser" parameterType="User">
+		insert into
+		user_list(user_id,pw,name,phone_num,shop_num)
+		values(concat('t',r_id.nextval),#{pw},#{name},#{phoneNum},#{shopNum})
+	</insert>
+	<insert id="insertShopUser" parameterType="User">
+		insert into
+		user_list(user_id,pw,name,phone_num,shop_num)
+		values(#{userId},#{pw},#{name},#{phoneNum},#{shopNum})
+	</insert>
+
+	<update id="changeInfo" parameterType="User">
+		update user_list set
+		pw=#{pw}, name=#{name}, phone_num=#{phoneNum} where
+		user_id=#{userId}
+	</update>
+
+	<select id="getUserInfoLogin" parameterType="User" resultType="User"
+		resultMap="find">
+		select user_id,pw,name,phone_num,shop_num FROM User_List
+		WHERE user_id
+		=
+		#{userId} and pw=#{pw}
+	</select>
+	<select id="getUserInfo" parameterType="String" resultType="User"
+		resultMap="find">
+		select * FROM User_List WHERE user_id = #{userId}
+	</select>
+
+	<select id="checkId" parameterType="String" resultType="User"
+		resultMap="find">
+		select user_id,pw,name,phone_num,shop_num FROM User_List
+		WHERE user_id
+		=
+		#{userId}
+	</select>
+
+	<select id="getLikeInfo" resultType="String">
+		select user_id from
+		like_info where user_id=#{userId} and shop_num=#{shopNum}
+	</select>
+	<select id="getLikeUser" resultType="String" parameterType="int">
+		select user_id from like_info where shop_num=#{shopNum}
+	</select>
+
+	<insert id="insertLike">
+		insert into like_info values(#{userId},#{shopNum})
+	</insert>
+
+
+</mapper>
