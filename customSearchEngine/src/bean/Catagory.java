@@ -9,7 +9,6 @@ public class Catagory<T> implements Serializable{
 	String searchURL;
 	ArrayList<T> contentsList;
 	
-	
 	public String getLogImgURL() {
 		return logImgURL;
 	}
