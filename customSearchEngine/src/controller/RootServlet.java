@@ -8,13 +8,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import dao.UserDAO;
 
 @RootURL("/")
-public class RootController {
+public class RootServlet extends HttpServlet {
 
 	@Mapping(url="/getURL.ap", method="post")
 	ModelView getURL(HttpServletRequest request,HttpServletResponse response){
