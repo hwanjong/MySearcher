@@ -16,14 +16,14 @@ import dao.UserDAO;
 @RootURL("/")
 public class RootController {
 
-//	@Mapping(url="/getURL.ap", method="post")
-//	ModelView getURL(HttpServletRequest request,HttpServletResponse response){
-//		String urlPath = request.getParameter("urlPath");
-//		System.out.println("요청받음 : "+urlPath);
-//		ModelView mv = new ModelView("redirect:"+urlPath);
-//		return mv;
-//	}
-//	
+	@Mapping(url="/getURL.ap", method="post")
+	ModelView getURL(HttpServletRequest request,HttpServletResponse response){
+		String urlPath = request.getParameter("urlPath");
+		System.out.println("요청받음 : "+urlPath);
+		ModelView mv = new ModelView("redirect:"+urlPath);
+		return mv;
+	}
+	
 //	@Mapping(url="/main.ap")
 //	ModelView getMain(HttpServletRequest request,HttpServletResponse response){
 //		ModelView mv = new ModelView("/main");
