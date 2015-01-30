@@ -1,9 +1,7 @@
-package Parser;
+package parser;
 
 import java.util.ArrayList;
-
-import Object.Category;
-import Object.SubContents;
+import bean.SubContents;
 
 public abstract class Parser {
 	public abstract ArrayList<SubContents> getContents(Category c, String param);

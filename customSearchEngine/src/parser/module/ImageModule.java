@@ -1,4 +1,4 @@
-package Parser.Module;
+package parser.module;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Object.Category;
-import Object.SubContents;
-import Parser.Parser;
+import parser.Category;
+import parser.Parser;
+import bean.SubContents;
 
 public class ImageModule extends Parser {
 

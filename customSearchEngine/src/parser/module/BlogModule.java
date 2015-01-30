@@ -1,4 +1,4 @@
-package Parser.Module;
+package parser.module;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,18 +8,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Object.Category;
-import Object.SubContents;
-import Parser.Parser;
+import parser.Category;
+import parser.Parser;
+import bean.SubContents;
 
-public class NewsModule extends Parser {
+public class BlogModule extends Parser {
 	@Override
 	public ArrayList<SubContents> getContents(Category c, String param) {
 		ArrayList<SubContents> contents = null;
 		String url = super.makeUrl(c, param);
 		switch (c) {
-		case NaverNews:
-			contents = getNaverNewsContents(url);
+		case NaverBlog:
+			contents = getNaverBlogContents(url);
 			break;
 		default:
 			break;
@@ -27,16 +27,17 @@ public class NewsModule extends Parser {
 		return contents;
 	}
 
-	private ArrayList<SubContents> getNaverNewsContents(String url) {
+	private ArrayList<SubContents> getNaverBlogContents(String url) {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).get();
-			Elements Results;
-			String ImageLink, TitleLink;
+
+			Elements Results, ImageLink;
+			String TitleLink;
 			Elements TitleName, Press, Content;
 
-			Results = doc.select("ul.srch_lst");
+			Results = doc.select("ul.search_list li");
 			if (Results == null)
 				return list;
 
@@ -44,13 +45,13 @@ public class NewsModule extends Parser {
 			for (Element e : Results) {
 				SubContents content = new SubContents();
 
-				ImageLink = e.select("a.thmb img").attr("src");
-				TitleLink = e.getElementsByClass("tit").attr("href");
-				TitleName = doc.getElementsByClass("tit");
-				Content = doc.getElementsByClass("dsc");
-				Press = doc.getElementsByClass("press");
+				ImageLink = e.getElementsByClass("thumb");
+				TitleLink = e.select("h5 a").attr("href");
+				TitleName = doc.select("ul.search_list li h5");
+				Content = doc.getElementsByClass("list_content");
+				Press = doc.getElementsByClass("category");
 
-				String str = ImageLink;
+				String str = ImageLink.attr("src");
 				if (str != "")
 					content.setImgURL(str);
 
@@ -70,14 +71,14 @@ public class NewsModule extends Parser {
 				if (str != "")
 					content.setSummary(str);
 
-				list.add(content);
-
 				count++;
+
+				list.add(content);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+
 		return list;
 	}
-
 }
