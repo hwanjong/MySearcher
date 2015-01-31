@@ -1,5 +1,7 @@
 package Parser;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import Object.Category;
@@ -32,7 +34,12 @@ public abstract class Parser {
 			requestUrl.append("https://www.google.co.kr/search?q=" + param + "&newwindow=1&source=lnms&tbm=isch&sa=X&ei=fZ3LVIWWDM-j8AWRp4LgBg&ved=0CAgQ_AUoAQ&biw=871&bih=808&dpr=0.9");
 			break;
 		case ElevenST:
-			requestUrl.append("http://search.11st.co.kr/SearchPrdAction.tmall?method=getTotalSearchSeller&targetTab=T&isGnb=Y&prdType=&category=&cmd=&pageSize=&lCtgrNo=&mCtgrNo=&sCtgrNo=&dCtgrNo=&fromACK=&semanticFromGNB=&gnbTag=TO&schFrom=&ID=&ctgrNo=&srCtgrNo=&kwd=" + param + "&adUrl=&adKwdTrcNo=1201501303512018906&adPrdNo=1140687850");
+			try {
+				requestUrl.append("http://search.11st.co.kr/SearchPrdAction.tmall?method=getTotalSearchSeller&targetTab=T&isGnb=Y&prdType=&category=&cmd=&pageSize=&lCtgrNo=&mCtgrNo=&sCtgrNo=&dCtgrNo=&fromACK=&semanticFromGNB=&gnbTag=TO&schFrom=&ID=&ctgrNo=&srCtgrNo=&kwd=" + URLEncoder.encode(param, "euc-kr") + "&adUrl=&adKwdTrcNo=1201501303512018906&adPrdNo=1140687850");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 			break;
 		case Aution:
 			requestUrl.append("http://search.auction.co.kr/search/search.aspx?keyword=" + param + "&itemno=&nickname=&arraycategory=&frm=&dom=auction&isSuggestion=No&retry=&Fwk=" + param + "&acode=SRP_SU_0100&encKeyword=" + param);
@@ -44,7 +51,12 @@ public abstract class Parser {
 			requestUrl.append("http://www.ticketmonster.co.kr/search/?keyword=" + param + "&keyword_view=" + param + "&uis=6b87db6a&sarea=g&st=0");
 			break;
 		case GitHub:
-			requestUrl.append("https://github.com/search?utf8=✓&q=" + param);
+			try {
+				requestUrl.append("https://github.com/search?utf8=%E2%9C%93&q=" + URLEncoder.encode(param, "utf-8"));
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 		case NaverKin:
 			requestUrl.append("http://kin.naver.com/search/list.nhn?cs=utf8&query=" + param);
@@ -53,10 +65,20 @@ public abstract class Parser {
 			requestUrl.append("http://pann.nate.com/search/pann?q=" + param);
 			break;
 		case StackOverFlow:
-			requestUrl.append("http://stackoverflow.com/search?q=" + param);
+			try {
+				requestUrl.append("http://stackoverflow.com/search?q=" + URLEncoder.encode(param, "utf-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case Wikipedia:
-			requestUrl.append("http://ko.wikipedia.org/wiki/" + param);
+			try {
+				requestUrl.append("http://ko.wikipedia.org/w/index.php?title=%ED%8A%B9%EC%88%98%3A%EA%B2%80%EC%83%89&profile=default&search=" + URLEncoder.encode(param, "utf-8")+ "&fulltext=Search");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		default:
 			break;

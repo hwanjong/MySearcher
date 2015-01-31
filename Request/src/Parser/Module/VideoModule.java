@@ -41,9 +41,10 @@ public class VideoModule extends Parser {
 
 			Elements eLists = source.select("ol.item-section > li");
 
-			SubContents content = new SubContents();
+		
 			Element sub = null;
 			for (Element e : eLists) {
+				SubContents content = new SubContents();
 				sub = e.select("h3.yt-lockup-title > a[href]").first();
 				if (sub != null)
 					content.setLinkURL("http://www.youtube.com"
@@ -156,7 +157,7 @@ public class VideoModule extends Parser {
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
-				sub = e.select("p.th_img").first();
+				sub = e.select("p.th_img > img").first();
 				if (sub != null)
 					content.setImgURL(sub.attr("src"));
 

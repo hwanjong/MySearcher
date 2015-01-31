@@ -4,15 +4,18 @@ import Object.Category;
 import Object.SubContents;
 import Parser.Parser;
 import Parser.Module.CommunityModule;
+import Parser.Module.DeveloperModule;
 import Parser.Module.DictionaryModule;
+import Parser.Module.ImageModule;
 import Parser.Module.ShoppingModule;
+import Parser.Module.VideoModule;
 
 
 public class ParserTest {
 
 	public static void main(String[] args) {
-		Parser p = new ShoppingModule();
-		ArrayList<SubContents> s = p.getContents(Category.Coupang, "송지효");
+		Parser p = new VideoModule();
+		ArrayList<SubContents> s = p.getContents(Category.PandoraTV, "stack");
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());
