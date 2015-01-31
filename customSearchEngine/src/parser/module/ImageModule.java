@@ -42,23 +42,16 @@ public class ImageModule extends Parser {
 
 				SubContents content = new SubContents();
 
-				String[] temp2;
 				String link = new String();
 				img = e.select("img");
 
 				if (img.toString().length() != 0) {
 
 					temp = e.attr("href").substring(7);
-					temp = temp.split("&sa")[0];
-					temp2 = temp.split("25");
-
-					for (int i = 0; i < temp2.length; i++) {
-
-						link += temp2[i];
-					}
+					link = temp.split("&sa")[0];
 
 					link = link.replace("%3F", "?").replace("%26", "&")
-							.replace("%3D", "=");
+							.replace("%3D", "=").replace("%25", "%");
 
 					// 이미지 저장//
 					// System.out.println(img.attr("src"));

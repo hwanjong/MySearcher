@@ -41,18 +41,12 @@ public class VideoModule extends Parser {
 
 			Elements eLists = source.select("ol.item-section > li");
 
-<<<<<<< HEAD
-			
-=======
-		
->>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
 				sub = e.select("h3.yt-lockup-title > a[href]").first();
 				if (sub != null)
-					content.setLinkURL("http://www.youtube.com"
-							+ sub.attr("href"));
+					content.setLinkURL("http://www.youtube.com" + sub.attr("href"));
 
 				sub = e.select("div.yt-thumb.video-thumb > img").first();
 				if (sub != null)
@@ -121,26 +115,7 @@ public class VideoModule extends Parser {
 				Time = doc.getElementsByClass("tm_b");
 
 				String str = ImageLink;
-<<<<<<< HEAD
-				if (str != "")
-					content.setImgURL(str);
 
-				str = TitleName;
-				if (str != "")
-					content.setTitle(str);
-
-				str = "http://tvcast.naver.com" + TitleLink;
-				if (str != "")
-					content.setLinkURL(str);
-
-				str = Press.get(count).text().trim();
-				if (str != "")
-					content.setReference(str);
-
-				str = Time.get(count++).text().trim();
-				content.setPlayTime(str);
-
-=======
 		    	if(str != "" || str != " ")	content.setImgURL(str);
 		    	
 		    	str = TitleName;
@@ -157,7 +132,6 @@ public class VideoModule extends Parser {
 
 		        count++;
 		        
->>>>>>> bb714298881b271c189503c86e68536f19773a46
 				list.add(content);
 
 			}
@@ -174,8 +148,7 @@ public class VideoModule extends Parser {
 		try {
 			source = Jsoup.connect(url).get();
 
-			Elements eLists = source
-					.select("div.group_srch.vdlst_hot > div.srch_list");
+			Elements eLists = source.select("div.group_srch.vdlst_hot > div.srch_list");
 
 			Element sub = null;
 			for (Element e : eLists) {

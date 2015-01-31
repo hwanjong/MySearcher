@@ -28,14 +28,9 @@ public class DictionaryModule extends Parser {
 	
 	private ArrayList<SubContents> getWikipediaContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
-<<<<<<< HEAD
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
-=======
-		try {
-			Document source = Jsoup.connect(url).get();
->>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Elements eLists = source.select("ul.mw-search-results > li");
 
 			Element sub = null;

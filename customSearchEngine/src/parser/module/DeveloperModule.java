@@ -31,14 +31,9 @@ public class DeveloperModule extends Parser {
 	
 	private ArrayList<SubContents> getStackOverFlowContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
-<<<<<<< HEAD
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
-=======
-		try {
-			Document source = Jsoup.connect(url).get();
->>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Elements eLists = source.select("div.question-summary.search-result");
 
 			Element sub = null;
@@ -95,14 +90,9 @@ public class DeveloperModule extends Parser {
 
 	private ArrayList<SubContents> getGitHubContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
-<<<<<<< HEAD
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
-=======
-		try {
-			Document source = Jsoup.connect(url).get();
->>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Elements eLists = source.select("ul.repo-list.js-repo-list > li");
 
 			Element sub = null;

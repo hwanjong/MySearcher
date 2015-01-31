@@ -37,8 +37,9 @@ public class ShoppingModule extends Parser {
 		return contents;
 	}
 
-	private ArrayList<SubContents> getAutionContents(String url) { // 링크, 이미지, 제목 , 가격 ,
-															// 판매자
+	private ArrayList<SubContents> getAutionContents(String url) { // 링크, 이미지,
+																	// 제목 , 가격 ,
+		// 판매자
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 
@@ -100,13 +101,13 @@ public class ShoppingModule extends Parser {
 		return list;
 	}
 
-	private ArrayList<SubContents> getElevenStContents(String url) { // 링크, 이미지, 제목 , 가격 ,
-															// // 판매자
+	private ArrayList<SubContents> getElevenStContents(String url) { // 링크, 이미지, 제목 ,가격 , 판매자
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 
 		try {
 			doc = Jsoup.connect(url).get();
+			// System.out.println(url.toString());
 			Elements original = doc.select("ul.list_type");
 
 			Elements lis = original.select("li");
@@ -119,13 +120,13 @@ public class ShoppingModule extends Parser {
 			for (Element e : lis) {
 
 				img = e.select("img").first();
-				if (img != null) {
+				title = e.select("div.pup_info").first();
+				if (img != null && title != null) {
 					SubContents content = new SubContents();
 
-					title = e.select("div.pup_info").first();
 					price = e.select("strong.pub_salep").first();
 					seller = e.select("div.seller_id").first();
-
+					// System.out.println();
 					// url
 					// 저장//System.out.println(title.select("a").first().attr("href"));
 					content.setLinkURL(title.select("a").first().attr("href"));
@@ -148,8 +149,8 @@ public class ShoppingModule extends Parser {
 					}
 
 					if (content.getLinkURL().length() != 1) { // 성인인증의 경우 #만
-																// 들어오는데
-																// 그걸 걸러내기위해
+						// 들어오는데
+						// 그걸 걸러내기위해
 
 						list.add(content);
 
@@ -165,7 +166,8 @@ public class ShoppingModule extends Parser {
 		return list;
 	}
 
-	private ArrayList<SubContents> getCoupangContents(String url) { // 링크, 이미지, 제목 , 가격 ,
+	private ArrayList<SubContents> getCoupangContents(String url) { // 링크, 이미지,
+																	// 제목 , 가격 ,
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 
@@ -223,8 +225,9 @@ public class ShoppingModule extends Parser {
 		return list;
 	}
 
-	private ArrayList<SubContents> getTimonContents(String url) { // 링크, 이미지, 제목 , 가격 ,
-														// 판매자
+	private ArrayList<SubContents> getTimonContents(String url) { // 링크, 이미지, 제목
+																	// , 가격 ,
+		// 판매자
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 
