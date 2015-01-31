@@ -14,8 +14,13 @@ import Parser.Module.VideoModule;
 public class ParserTest {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		Parser p = new VideoModule();
 		ArrayList<SubContents> s = p.getContents(Category.PandoraTV, "stack");
+=======
+		Parser p = new ShoppingModule();
+		ArrayList<SubContents> s = p.getContents(Category.Coupang, "한글");
+>>>>>>> bbb58ef608f15eab7e9a81519e24992c58471fd4
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());

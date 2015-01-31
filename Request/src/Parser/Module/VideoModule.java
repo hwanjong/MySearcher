@@ -117,24 +117,22 @@ public class VideoModule extends Parser {
 				Time = doc.getElementsByClass("tm_b");
 
 				String str = ImageLink;
-				if (str != "")
-					content.setImgURL(str);
+		    	if(str != "" || str != " ")	content.setImgURL(str);
+		    	
+		    	str = TitleName;
+		    	if(str != "" || str != " ")	content.setTitle(str);
+		    	
+		    	str = "http://tvcast.naver.com" + TitleLink;
+		    	if(str != "" || str != " ")	content.setLinkURL(str);
+		    	
+		    	str = Press.get(count).text().trim();
+		    	if(str != "" || str != " ")	content.setReference(str);
+		    	
+		    	str = Time.get(count).text().trim();
+		        content.setPlayTime(str);
 
-				str = TitleName;
-				if (str != "")
-					content.setTitle(str);
-
-				str = "http://tvcast.naver.com" + TitleLink;
-				if (str != "")
-					content.setLinkURL(str);
-
-				str = Press.get(count).text().trim();
-				if (str != "")
-					content.setReference(str);
-
-				str = Time.get(count++).text().trim();
-				content.setPlayTime(str);
-
+		        count++;
+		        
 				list.add(content);
 
 			}

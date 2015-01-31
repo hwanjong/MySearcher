@@ -9,12 +9,23 @@ import Object.SubContents;
 
 public abstract class Parser {
 	public abstract ArrayList<SubContents> getContents(Category c, String param);
-	protected String makeUrl(Category c, String param) {
+	protected String makeUrl(Category c, String param) 
+	{
 		StringBuilder requestUrl = new StringBuilder();
 		/*
 		 * Object... params for (Object each : params) { }
 		 */
-		switch (c) {
+		try 
+		{
+			param = URLEncoder.encode(param, "utf-8");
+		} 
+		catch (UnsupportedEncodingException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		switch (c) 
+		{
 		case NaverTVcast:
 			requestUrl.append("http://tvcast.naver.com/search?query=" + param);
 			break;
