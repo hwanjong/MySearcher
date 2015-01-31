@@ -51,24 +51,19 @@ public class NewsModule extends Parser {
 				Press = doc.getElementsByClass("press");
 
 				String str = ImageLink;
-				if (str != "")
-					content.setImgURL(str);
-
-				str = TitleName.get(count).text().trim();
-				if (str != "")
-					content.setTitle(str);
-
-				str = TitleLink;
-				if (str != "")
-					content.setLinkURL(str);
-
-				str = Press.get(count).text().trim();
-				if (str != "")
-					content.setReference(str);
-
-				str = Content.get(count).text().trim();
-				if (str != "")
-					content.setSummary(str);
+	       	 	if(str != "" || str != " ")	content.setImgURL(str);
+		    	
+		    	str = TitleName.get(count).text().trim();
+		    	if(str != "" || str != " ")	content.setTitle(str);
+		        
+		        str = TitleLink;
+		        if(str != "" || str != " ")	content.setLinkURL(str);
+		        
+		        str = Press.get(count).text().trim();
+		        if(str != "" || str != " ")	content.setReference(str);
+		        
+		        str = Content.get(count).text().trim();
+		        if(str != "" || str != " ")	content.setSummary(str);
 
 				list.add(content);
 
