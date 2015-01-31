@@ -10,7 +10,6 @@
 		<id column="shop_num" property="shopNum" />
 	</resultMap>
 
-
 	<insert id="insertUser" parameterType="User">
 		insert into
 		user_list(user_id,pw,name,phone_num)
