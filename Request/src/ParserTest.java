@@ -3,13 +3,20 @@ import java.util.ArrayList;
 import Object.Category;
 import Object.SubContents;
 import Parser.Parser;
-import Parser.Module.ShoppingModule;
+import Parser.Module.*;
 
 public class ParserTest {
 
 	public static void main(String[] args) {
-		Parser p = new ShoppingModule();
-		ArrayList<SubContents> s = p.getContents(Category.Coupang, "송지효");
+		// Parser p = new BlogModule();
+		// Parser p = new CommunityModule();
+		// Parser p = new DeveloperModule();
+		// Parser p = new ImageModule();
+		// Parser p = new NewsModule();
+		// Parser p = new ShoppingModule();
+		Parser p = new VideoModule();
+		
+		ArrayList<SubContents> s = p.getContents(Category.NaverTVcast, "초콜릿");
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());

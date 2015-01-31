@@ -53,19 +53,19 @@ public class BlogModule extends Parser {
 
 				String str = ImageLink.attr("src");
 
-		    	if(str != "" || str != " ")	content.setImgURL(str);
+		    	if(str != "" && str != " ")	content.setImgURL(str);
 		    	
 		    	str = TitleName.get(count).text().trim();
-		        if(str != "" || str != " ") content.setTitle(str);
+		        if(str != "" && str != " ") content.setTitle(str);
 		        
 		        str = TitleLink;
-		        if(str != "" || str != " ")	content.setLinkURL(str);
+		        if(str != "" && str != " ")	content.setLinkURL(str);
 		        
 		        str = Press.get(count).text().trim();
-		        if(str != "" || str != " ")	content.setReference(str);
+		        if(str != "" && str != " ")	content.setReference(str);
 		        
 		        str = Content.get(count).text().trim();
-		        if(str != "" || str != " ")	content.setSummary(str);
+		        if(str != "" && str != " ")	content.setSummary(str);
 
 				count++;
 

@@ -28,11 +28,9 @@ public abstract class Parser {
 			requestUrl.append("http://search.pandora.tv/?&query=" + param);
 			break;
 		case NaverNews:
-			try {
-				requestUrl.append("http://news.naver.com/main/search/search.nhn?query=" + URLEncoder.encode(param, "euc-kr"));
-			} catch (UnsupportedEncodingException e2) {
-				e2.printStackTrace();
-			}
+			try {	param = URLEncoder.encode(param, "euc-kr");	} 
+			catch (UnsupportedEncodingException e2) {}
+			requestUrl.append("http://news.naver.com/main/search/search.nhn?query=" + param);
 			break;
 		case NaverBlog:
 			requestUrl.append("http://section.blog.naver.com/sub/SearchBlog.nhn?type=post&option.keyword=" + param);

@@ -193,27 +193,27 @@ public class ShoppingModule extends Parser {
 				Content = e.select("span.condition em");
 
 				String str = ImageLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setImgURL(str);
 
 				str = TitleName.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setTitle(str);
 
 				str = "www.coupang.com" + TitleLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setLinkURL(str);
 
 				str = Summary;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setSummary(str);
 
 				str = Price.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setPrice(str);
 
 				str = Content.text().trim() + "개 구매중";
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setShopName(str);
 
 				list.add(content);
@@ -254,28 +254,28 @@ public class ShoppingModule extends Parser {
 				Content = e.select("span.people");
 
 				String str = ImageLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setImgURL(str);
 
 				str = e.select("p.srch_color3").text().trim() + " "
 						+ TitleName.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setTitle(str);
 
 				str = "www.ticketmonster.co.kr" + TitleLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setLinkURL(str);
 
 				str = Summary;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setSummary(str);
 
 				str = Price.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setPrice(str);
 
 				str = Content.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setShopName(str);
 
 				list.add(content);
