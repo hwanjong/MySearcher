@@ -41,7 +41,11 @@ public class VideoModule extends Parser {
 
 			Elements eLists = source.select("ol.item-section > li");
 
+<<<<<<< HEAD
 			
+=======
+		
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
@@ -117,6 +121,7 @@ public class VideoModule extends Parser {
 				Time = doc.getElementsByClass("tm_b");
 
 				String str = ImageLink;
+<<<<<<< HEAD
 				if (str != "")
 					content.setImgURL(str);
 
@@ -135,6 +140,24 @@ public class VideoModule extends Parser {
 				str = Time.get(count++).text().trim();
 				content.setPlayTime(str);
 
+=======
+		    	if(str != "" || str != " ")	content.setImgURL(str);
+		    	
+		    	str = TitleName;
+		    	if(str != "" || str != " ")	content.setTitle(str);
+		    	
+		    	str = "http://tvcast.naver.com" + TitleLink;
+		    	if(str != "" || str != " ")	content.setLinkURL(str);
+		    	
+		    	str = Press.get(count).text().trim();
+		    	if(str != "" || str != " ")	content.setReference(str);
+		    	
+		    	str = Time.get(count).text().trim();
+		        content.setPlayTime(str);
+
+		        count++;
+		        
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 				list.add(content);
 
 			}

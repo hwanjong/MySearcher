@@ -35,6 +35,7 @@ public class VideoModule extends Parser {
 
 	private ArrayList<SubContents> getYouTubeContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+<<<<<<< HEAD
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
@@ -45,6 +46,16 @@ public class VideoModule extends Parser {
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
+=======
+		try {
+			Document source = Jsoup.connect(url).get();
+
+			Elements eLists = source.select("ol.item-section > li");
+
+			SubContents content = new SubContents();
+			Element sub = null;
+			for (Element e : eLists) {
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 				sub = e.select("h3.yt-lockup-title > a[href]").first();
 				if (sub != null)
 					content.setLinkURL("http://www.youtube.com"
@@ -147,9 +158,14 @@ public class VideoModule extends Parser {
 
 	private ArrayList<SubContents> getPandoraTVcontents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+<<<<<<< HEAD
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
+=======
+		try {
+			Document source = Jsoup.connect(url).get();
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 
 			Elements eLists = source
 					.select("div.group_srch.vdlst_hot > div.srch_list");
@@ -157,7 +173,11 @@ public class VideoModule extends Parser {
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
+<<<<<<< HEAD
 				sub = e.select("p.th_img > img").first();
+=======
+				sub = e.select("p.th_img").first();
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 				if (sub != null)
 					content.setImgURL(sub.attr("src"));
 

@@ -107,8 +107,14 @@ public class ShoppingModule extends Parser {
 
 		try {
 			doc = Jsoup.connect(url).get();
+<<<<<<< HEAD
 			Elements original = doc.select("ul.list_type");
 
+=======
+			System.out.println(url.toString());
+			Elements original = doc.select("ul.list_type");
+			
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 			Elements lis = original.select("li");
 
 			Element img;
@@ -119,6 +125,7 @@ public class ShoppingModule extends Parser {
 			for (Element e : lis) {
 
 				img = e.select("img").first();
+<<<<<<< HEAD
 				if (img != null) {
 					SubContents content = new SubContents();
 
@@ -126,6 +133,16 @@ public class ShoppingModule extends Parser {
 					price = e.select("strong.pub_salep").first();
 					seller = e.select("div.seller_id").first();
 
+=======
+				title = e.select("div.pup_info").first();
+				if (img != null && title!=null) {
+					SubContents content = new SubContents();
+
+					
+					price = e.select("strong.pub_salep").first();
+					seller = e.select("div.seller_id").first();
+					//System.out.println();
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 					// url
 					// 저장//System.out.println(title.select("a").first().attr("href"));
 					content.setLinkURL(title.select("a").first().attr("href"));

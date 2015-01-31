@@ -42,13 +42,17 @@ public class ImageModule extends Parser {
 
 				SubContents content = new SubContents();
 
+<<<<<<< HEAD
 				String[] temp2;
+=======
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 				String link = new String();
 				img = e.select("img");
 
 				if (img.toString().length() != 0) {
 
 					temp = e.attr("href").substring(7);
+<<<<<<< HEAD
 					temp = temp.split("&sa")[0];
 					temp2 = temp.split("25");
 
@@ -59,6 +63,13 @@ public class ImageModule extends Parser {
 
 					link = link.replace("%3F", "?").replace("%26", "&")
 							.replace("%3D", "=");
+=======
+					link = temp.split("&sa")[0];
+					
+
+					link = link.replace("%3F", "?").replace("%26", "&")
+							.replace("%3D", "=").replace("%25", "%");
+>>>>>>> bb714298881b271c189503c86e68536f19773a46
 
 					// 이미지 저장//
 					// System.out.println(img.attr("src"));
