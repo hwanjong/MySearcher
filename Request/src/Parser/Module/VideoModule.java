@@ -35,8 +35,9 @@ public class VideoModule extends Parser {
 
 	private ArrayList<SubContents> getYouTubeContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+		Document source = null;
 		try {
-			Document source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).get();
 
 			Elements eLists = source.select("ol.item-section > li");
 
@@ -145,8 +146,9 @@ public class VideoModule extends Parser {
 
 	private ArrayList<SubContents> getPandoraTVcontents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+		Document source = null;
 		try {
-			Document source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).get();
 
 			Elements eLists = source
 					.select("div.group_srch.vdlst_hot > div.srch_list");
