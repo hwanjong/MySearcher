@@ -1,31 +1,18 @@
-/*import java.io.IOException;
 import java.util.ArrayList;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
+import Object.Category;
 import Object.SubContents;
 import Parser.Parser;
+import Parser.Module.CommunityModule;
 import Parser.Module.DictionaryModule;
+import Parser.Module.ShoppingModule;
 
-public class test {
+
+public class ParserTest {
+
 	public static void main(String[] args) {
-		Document doc = null;
-
-		try {
-			doc = Jsoup
-					.connect(
-							"http://ko.wikipedia.org/wiki/%ED%8A%B9%EC%88%98:%EA%B2%80%EC%83%89?search=lol&fulltext=%EB%B3%B8%EB%AC%B8+%EA%B2%80%EC%83%89")
-					.get();
-			// 주소
-			// System.out.println(doc.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Parser p = new DictionaryModule(doc);
-		ArrayList<SubContents> s = ((DictionaryModule) p)
-				.getWikipediaContents();
+		Parser p = new ShoppingModule();
+		ArrayList<SubContents> s = p.getContents(Category.Coupang, "송지효");
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());
@@ -44,5 +31,5 @@ public class test {
 			System.out.println();
 		}
 	}
+
 }
-*/
