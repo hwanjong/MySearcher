@@ -12,7 +12,7 @@ public class ParserTest {
 
 	public static void main(String[] args) {
 		Parser p = new ShoppingModule();
-		ArrayList<SubContents> s = p.getContents(Category.Coupang, "송지효");
+		ArrayList<SubContents> s = p.getContents(Category.Coupang, "한글");
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());
