@@ -34,7 +34,7 @@ public class CommunityModule extends Parser {
 		Document doc = null;
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 
 			Elements original = doc.select("ul.s_list");
 			Element dt;
@@ -99,7 +99,7 @@ public class CommunityModule extends Parser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements original = doc.select("li");
 			Elements dd;
 

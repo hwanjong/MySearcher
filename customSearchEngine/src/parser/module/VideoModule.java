@@ -37,7 +37,7 @@ public class VideoModule extends Parser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).timeout(5000).get();
 
 			Elements eLists = source.select("ol.item-section > li");
 
@@ -95,7 +95,7 @@ public class VideoModule extends Parser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String TitleName, ImageLink, TitleLink;
 			Elements Press, Time;
@@ -116,16 +116,16 @@ public class VideoModule extends Parser {
 
 				String str = ImageLink;
 
-		    	if(str != "" || str != " ")	content.setImgURL(str);
+		    	if(str != "" && str != " ")	content.setImgURL(str);
 		    	
 		    	str = TitleName;
-		    	if(str != "" || str != " ")	content.setTitle(str);
+		    	if(str != "" && str != " ")	content.setTitle(str);
 		    	
 		    	str = "http://tvcast.naver.com" + TitleLink;
-		    	if(str != "" || str != " ")	content.setLinkURL(str);
+		    	if(str != "" && str != " ")	content.setLinkURL(str);
 		    	
 		    	str = Press.get(count).text().trim();
-		    	if(str != "" || str != " ")	content.setReference(str);
+		    	if(str != "" && str != " ")	content.setReference(str);
 		    	
 		    	str = Time.get(count).text().trim();
 		        content.setPlayTime(str);
@@ -146,7 +146,7 @@ public class VideoModule extends Parser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).timeout(5000).get();
 
 			Elements eLists = source.select("div.group_srch.vdlst_hot > div.srch_list");
 

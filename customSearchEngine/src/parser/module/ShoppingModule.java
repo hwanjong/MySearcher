@@ -44,7 +44,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Element ori = doc.select("div.listing.cmt").first(); // 검색결과 없을 때.
 			if (ori == null)
 				return list;
@@ -106,7 +106,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			// System.out.println(url.toString());
 			Elements original = doc.select("ul.list_type");
 
@@ -172,7 +172,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink, TitleLink;
 			Elements TitleName, Price, Content;
@@ -193,27 +193,27 @@ public class ShoppingModule extends Parser {
 				Content = e.select("span.condition em");
 
 				String str = ImageLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setImgURL(str);
 
 				str = TitleName.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setTitle(str);
 
 				str = "www.coupang.com" + TitleLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setLinkURL(str);
 
 				str = Summary;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setSummary(str);
 
 				str = Price.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setPrice(str);
 
 				str = Content.text().trim() + "개 구매중";
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setShopName(str);
 
 				list.add(content);
@@ -232,7 +232,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink;
 			String TitleLink;
@@ -254,28 +254,28 @@ public class ShoppingModule extends Parser {
 				Content = e.select("span.people");
 
 				String str = ImageLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setImgURL(str);
 
 				str = e.select("p.srch_color3").text().trim() + " "
 						+ TitleName.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setTitle(str);
 
 				str = "www.ticketmonster.co.kr" + TitleLink;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setLinkURL(str);
 
 				str = Summary;
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setSummary(str);
 
 				str = Price.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setPrice(str);
 
 				str = Content.text().trim();
-				if (str != "" || str != " ")
+				if (str != "" && str != " ")
 					content.setShopName(str);
 
 				list.add(content);
