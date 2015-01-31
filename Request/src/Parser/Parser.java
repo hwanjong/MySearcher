@@ -15,14 +15,6 @@ public abstract class Parser {
 		/*
 		 * Object... params for (Object each : params) { }
 		 */
-		try 
-		{
-			param = URLEncoder.encode(param, "utf-8");
-		} 
-		catch (UnsupportedEncodingException e) 
-		{
-			e.printStackTrace();
-		}
 		
 		switch (c) 
 		{
@@ -36,7 +28,11 @@ public abstract class Parser {
 			requestUrl.append("http://search.pandora.tv/?&query=" + param);
 			break;
 		case NaverNews:
-			requestUrl.append("http://news.naver.com/main/search/search.nhn?query=" + param);
+			try {
+				requestUrl.append("http://news.naver.com/main/search/search.nhn?query=" + URLEncoder.encode(param, "euc-kr"));
+			} catch (UnsupportedEncodingException e2) {
+				e2.printStackTrace();
+			}
 			break;
 		case NaverBlog:
 			requestUrl.append("http://section.blog.naver.com/sub/SearchBlog.nhn?type=post&option.keyword=" + param);
