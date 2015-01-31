@@ -33,7 +33,7 @@ public class DeveloperModule extends Parser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).timeout(5000).get();
 			Elements eLists = source.select("div.question-summary.search-result");
 
 			Element sub = null;
@@ -92,7 +92,7 @@ public class DeveloperModule extends Parser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).timeout(5000).get();
 			Elements eLists = source.select("ul.repo-list.js-repo-list > li");
 
 			Element sub = null;

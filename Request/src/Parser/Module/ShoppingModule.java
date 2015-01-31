@@ -44,7 +44,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Element ori = doc.select("div.listing.cmt").first(); // 검색결과 없을 때.
 			if (ori == null)
 				return list;
@@ -106,7 +106,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			// System.out.println(url.toString());
 			Elements original = doc.select("ul.list_type");
 
@@ -172,7 +172,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink, TitleLink;
 			Elements TitleName, Price, Content;
@@ -232,7 +232,7 @@ public class ShoppingModule extends Parser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink;
 			String TitleLink;

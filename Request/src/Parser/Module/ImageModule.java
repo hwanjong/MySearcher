@@ -32,7 +32,7 @@ public class ImageModule extends Parser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).userAgent("Mozlia").get();
+			doc = Jsoup.connect(url).userAgent("Mozlia").timeout(5000).get();
 			Elements ori = doc.select("a");
 
 			Elements img;

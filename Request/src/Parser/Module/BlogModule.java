@@ -31,7 +31,7 @@ public class BlogModule extends Parser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 
 			Elements Results, ImageLink;
 			String TitleLink;

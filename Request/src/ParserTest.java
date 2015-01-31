@@ -16,7 +16,7 @@ public class ParserTest {
 		// Parser p = new ShoppingModule();
 		Parser p = new VideoModule();
 		
-		ArrayList<SubContents> s = p.getContents(Category.NaverTVcast, "초콜릿");
+		ArrayList<SubContents> s = p.getContents(Category.NaverTVcast, "외장하드");
 
 		for (int i = 0; i < s.size(); i++) {
 			System.out.println(s.get(i).getCatagoryTag());
