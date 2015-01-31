@@ -1,9 +1,4 @@
-customSearchEngine/.settings/
-customSearchEngine/build/
-customSearchEngine/.classpath
-customSearchEngine/.project
-Request/.settings/
-Request/build/
-Request/.classpath
-Request/.project
-.gitignore
+searcherEngine/.settings/
+searcherEngine/build/
+searcherEngine/.classpath
+searcherEngine/.project
