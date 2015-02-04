@@ -12,7 +12,6 @@ public class SubContents implements Serializable{
 	String summary;
 	String uploadTime;
 	
-	
 	//동영상
 	String playTime;
 	

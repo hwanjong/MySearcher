@@ -23,16 +23,6 @@
 
 	<mappers>
 		<mapper resource="mapper/UserMapper.xml" />
-		<mapper resource="mapper/ShopMapper.xml" />
-		<mapper resource="mapper/OrderMapper.xml" />
-		<!-- 
-		<mapper resource="mapper/Shop.xml" />
-		<mapper resource="mapper/InterestMapper.xml" />
-		<mapper resource="mapper/SubTopicMapper.xml" />
-		<mapper resource="mapper/ParticipantMapper.xml" />
-		<mapper resource="mapper/CreateMapper.xml" />
-		<mapper resource="mapper/EtcMapper.xml" />
-		 -->
 	</mappers>
 
 </configuration>

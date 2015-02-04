@@ -3,55 +3,39 @@ package bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User<T> implements Serializable{
+public class User implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	String id;
+	String userId;
 	String pw;
 	
 	String name;
-	String eMail;
+	String curPage;
 	
-	ArrayList<T> settingList;
-
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-
 	public String getPw() {
 		return pw;
 	}
-
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String geteMail() {
-		return eMail;
+	public String getCurPage() {
+		return curPage;
+	}
+	public void setCurPage(String curPage) {
+		this.curPage = curPage;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
-	public ArrayList<T> getSettingList() {
-		return settingList;
-	}
-
-	public void setSettingList(ArrayList<T> settingList) {
-		this.settingList = settingList;
-	}
 	
 }

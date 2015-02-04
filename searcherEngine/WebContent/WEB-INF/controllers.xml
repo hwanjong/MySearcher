@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controllers>
+	<control>
+		<control-name>root</control-name>
+		<control-class>controller.RootController</control-class>
+	</control>
+	<view>
+		<prefix>/WEB-INF/view</prefix>
+		<suffix>.jsp</suffix>
+	</view>
+</controllers>

@@ -1,7 +1,8 @@
-package controller;
+package tool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale.Category;
 
 import parser.BlogParser;
 import parser.CommunityParser;
@@ -9,6 +10,7 @@ import parser.DeveloperParser;
 import parser.DictionaryParser;
 import parser.ImageParser;
 import parser.NewsParser;
+import parser.RequestParser;
 import parser.ShoppingParser;
 import parser.VideoParser;
 import bean.SubContents;
@@ -24,6 +26,7 @@ import constants.constants.vidio;
 
 public class ParsingManager {
 	HashMap<String, String> categoryMap;
+	String requestURL;
 	public ParsingManager() {
 		// TODO Auto-generated constructor stub
 		categoryMap = new HashMap<>();
@@ -52,7 +55,15 @@ public class ParsingManager {
 			categoryMap.put(name.toString(),"dictionary");
 		}
 	}
-	ArrayList<SubContents> getContents(UserRequest category, String param){
+	public ArrayList<SubContents> getContents(String categoryStr, String param){
+		UserRequest category=null;
+		for(UserRequest cat : UserRequest.values()){
+			if(categoryStr.equals(cat.toString())){
+				category=cat;
+				break;
+			}
+		}
+		requestURL = RequestParser.makeUrl(category, param);
 		String categoryType = categoryMap.get(category.toString());
 		if(categoryType.equals("vidio"))return new VideoParser().getContents(category, param);
 		else if(categoryType.equals("news"))return new NewsParser().getContents(category, param);
@@ -63,6 +74,12 @@ public class ParsingManager {
 		else if(categoryType.equals("community"))return new CommunityParser().getContents(category, param);
 		else if(categoryType.equals("dictionary"))return new DictionaryParser().getContents(category, param);
 		else return null;
+	}
+	public String getRequestURL() {
+		return requestURL;
+	}
+	public void setRequestURL(String requestURL) {
+		this.requestURL = requestURL;
 	}
 }
 

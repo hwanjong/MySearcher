@@ -5,20 +5,38 @@ cur_page int(1),
 name varchar(20) not null);
 
 create table catagory(
-	catagory_id int(4) primary key auto_increment,
-    catagory_name varchar(20) not null,
-    request_url varchar(100) not null,
+    catagory_name varchar(20) primary key,
     logo_img varchar(100)
-    );
+);
     
 
 create table user_set(
 	user_id varchar(20),
-	catagory_id int(4) not null,
+	catagory_name varchar(20) not null,
+    page_num int(1) not null,
     position_x int(5),
     position_y int(5),
     width int(5),
     height int(5),
-    page_num int(1) not null,
     constraint usersetting foreign key(user_id) references user(user_id) on delete cascade on update restrict
 );
+
+alter table user add cur_page int(1);
+alter table user_set add page_num int(1) not null;
+alter table user_set add set_no int(3) auto_increment primary key;
+alter table catagory drop column catagory_id;
+alter table user_set change catagory_id catagory_name varchar(20);
+
+
+select * FROM User WHERE user_id = 'hwan7287' and pw = '123';
+
+
+insert into catagory(catagory_name,logo_img) values('Wikipedia','img/logo_icon/Wikipedia.png');
+
+insert into user_set(user_id,catagory_name,page_num) values('hwan72872','Wikipedia',2);
+
+select catagory.catagory_name, catagory.logo_img from user join user_set on user.cur_page = user_set.page_num join catagory on user_set.catagory_name = catagory.catagory_name where user.user_id='t1';
+select c.catagory_name, c.logo_img from  User u join user_set s on (u.user_id = s.user_id) join catagory c on (s.catagory_name=c.catagory_name) where u.user_id ='hwan7287' and u.cur_page = s.page_num;
+
+
+select cur_page from user where user_id='hwan7287';

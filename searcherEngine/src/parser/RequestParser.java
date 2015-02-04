@@ -11,7 +11,7 @@ public abstract class RequestParser {
 
 	public abstract ArrayList<SubContents> getContents(UserRequest c, String param);
 	
-	protected String makeUrl(UserRequest c, String param) {
+	public static String makeUrl(UserRequest c, String param) {
 		StringBuilder requestUrl = new StringBuilder();
 
 		switch (c) 
