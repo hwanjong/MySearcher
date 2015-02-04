@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import src.parser.module.String;
 import bean.SubContents;
 import constants.constants.UserRequest;
 
