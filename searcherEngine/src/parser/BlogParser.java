@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import src.parser.module.String;
 import bean.SubContents;
 import constants.constants.UserRequest;
 
@@ -51,8 +52,8 @@ public class BlogParser extends RequestParser {
 				Press = doc.getElementsByClass("category");
 
 				String str = ImageLink.attr("src");
-
-		    	if(str != "" && str != " ")	content.setImgURL(str);
+		        str = str.split("jpg")[0];
+		        if(str != "" && str != " ")   content.setImgURL(str + "jpg");
 		    	
 		    	str = TitleName.get(count).text().trim();
 		        if(str != "" && str != " ") content.setTitle(str);
