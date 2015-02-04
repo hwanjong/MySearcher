@@ -52,8 +52,8 @@ public class BlogModule extends Parser {
 				Press = doc.getElementsByClass("category");
 
 				String str = ImageLink.attr("src");
-
-		    	if(str != "" && str != " ")	content.setImgURL(str);
+		        str = str.split("jpg")[0];
+		        if(str != "" && str != " ")   content.setImgURL(str + "jpg");
 		    	
 		    	str = TitleName.get(count).text().trim();
 		        if(str != "" && str != " ") content.setTitle(str);
