@@ -25,7 +25,7 @@ public class RootController {
 
 	@Mapping(url="/main.ap")
 	ModelView getMain(HttpServletRequest request,HttpServletResponse response){
-		ModelView mv = new ModelView("/contents");
+		ModelView mv = new ModelView("/main");
 		return mv;
 	}
 	
@@ -36,7 +36,7 @@ public class RootController {
 		String param = request.getParameter("param");
 		
 		ParsingManager parsingManager = new ParsingManager();
-		
+		if(user==null) user=new User("default");
 		UserDAO userDAO = new UserDAO();
 		ArrayList<Category> curPageCategoryList =  userDAO.getCurPageCategory(user);
 		
@@ -49,6 +49,7 @@ public class RootController {
 			pageNum=userDAO.getCurPageNum(user);
 			System.out.println(pageNum);
 		}
+		mv.setModel("param", param);
 		mv.setModel("pageNum",pageNum);
 		mv.setModel("curPageCategoryList", curPageCategoryList);
 		return mv;

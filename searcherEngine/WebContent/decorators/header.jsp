@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><decorator:title default="searcher" /></title>
+<title><decorator:title default="Picker" /></title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -82,44 +82,78 @@
 </script>
 </head>
 <body>
-	<div id="headDiv">
-		<h1>My Searcher Test Page</h1>
-		<form action="searchRequest.ap" method="post"
-			class="navbar-form navbar-left" role="search">
-			<div class="form-group">
-				<input type="text" name="param" class="form-control"
-					placeholder="Search">
-			</div>
-			<button type="submit" class="btn btn-default">
-				<i class="glyphicon glyphicon-search"
-					style="padding: 3px; width: 40px;"></i>
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
-		</form>
-		<c:choose>
-			<c:when test="${empty user}">
-				<button type="button" id="loginModalBtn" class="btn btn-default">
-					<i class="glyphicon glyphicon-user" style="padding: 3px;"></i>
-				</button>
-			</c:when>
-			<c:otherwise>
-				'${user.name }' 님
-				<button type="button" id="info" title="내정보"
-					data-content="'${user.name }'님 환영합니다. &nbsp(현재페이지 :${model.pageNum }/5)"
-					data-toggle="popover" data-placement="bottom"
-					class="btn btn-default">
-					<i class="glyphicon glyphicon-info-sign" style="padding: 3px;"></i>
-				</button>
-				<button type="button" id="logout" class="btn btn-default">
-					<i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i>
-				</button>
-			</c:otherwise>
-		</c:choose>
+			<a class="navbar-brand" href="main.ap"><img
+				src="img/head_logo.png" style="width: 60px;"></a>
+		</div>
 
-		<button type="button" id="category" class="btn btn-default">
-			<i class="glyphicon glyphicon-plus" style="padding: 3px;"></i>
-		</button>
-	</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<c:if test="${pageId!='/main.ap'}">
+				<form action="searchRequest.ap" method="post" class="navbar-form navbar-left" role="search">
+					<input type="text" class="form-control" placeholder="Search" name="param"
+						style="width: 350px;" value="${model.param}">
 
+					<button type="submit" class="btn btn-default">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</form>
+			</c:if>
+			<ul class="nav navbar-nav navbar-right">
+				<c:if test="${user != null}">
+					<li><a href="#">'${user.name }' 님</a></li>
+					<c:if test="${pageId!='/main.ap'}">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">현재페이지 :${model.pageNum }/5</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+							</ul></li>
+					</c:if>
+				</c:if>
+				<c:if test="${empty user}">
+					<li><a href="#">'방문자' 님</a></li>
+				</c:if>
+				<li>
+					<button type="button" id="category"
+						class="btn btn-default navbar-btn">
+						<i class="glyphicon glyphicon-plus" style="padding: 3px;"></i>
+					</button></li> 
+					<c:choose>
+						<c:when test="${empty user}">
+							<li><button type="button" id="loginModalBtn"
+								class="btn btn-default navbar-btn">
+								<i class="glyphicon glyphicon-user" style="padding: 3px;"></i>
+							</button></li>
+						</c:when>
+						<c:otherwise>
+
+							<li><button type="button" id="logout"
+								class="btn btn-default navbar-btn">
+								<i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i>
+							</button></li>
+						</c:otherwise>
+
+					</c:choose>
+
+
+
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
 	<!-- Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -203,7 +237,7 @@
 	</div>
 	<!-- /.modal -->
 	<div id="categoryBox">
-		임시 Category Box
+		카테고리 추가 박스
 		<button type="button" class="close pull-right"
 			onclick='$("#categoryBox").hide()'>×</button>
 		<ul class="nav nav-tabs" id="myTab" style="text-align: center;">
