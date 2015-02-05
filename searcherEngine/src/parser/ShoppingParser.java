@@ -196,7 +196,7 @@ public class ShoppingParser extends RequestParser {
 				if (str != "" && str != " ")
 					content.setTitle(str);
 
-				str = "www.coupang.com" + TitleLink;
+				str = "http://www.coupang.com" + TitleLink;
 				if (str != "" && str != " ")
 					content.setLinkURL(str);
 				
@@ -252,7 +252,7 @@ public class ShoppingParser extends RequestParser {
 				if (str != "" && str != " ")
 					content.setTitle(str);
 
-				str = "www.ticketmonster.co.kr" + TitleLink;
+				str = "http://www.ticketmonster.co.kr" + TitleLink;
 				if (str != "" && str != " ")
 					content.setLinkURL(str);
 
