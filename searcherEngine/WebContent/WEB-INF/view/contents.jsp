@@ -15,10 +15,11 @@
 		<c:forEach var="category" items="${model.curPageCategoryList}">
 			<div class="subContainer">
 				<div class="logoContainer">
-					<img src="${category.logImgURL }" style="width: 60px;">
-					<h3 style="display: inline-block;">
+					<img src="${category.logImgURL }" style="width: 150px;">
+					
+					<%-- <h3 style="display: inline-block;">
 						<a href="${category.searchURL }"> 검색결과 더보기 >></a>
-					</h3>
+					</h3> --%>
 				</div>
 				<div class="contentsContainer">
 					<c:forEach var="contents" items="${category.contentsList}">
@@ -37,7 +38,6 @@
 										<a href="${contents.linkURL }"><img
 											src="${contents.imgURL }" width="95%"></a><br />${contents.playTime}
 									</div>
-									TEST중 : ${contents.imgURL }<br/>
 									<div class="sammary"
 										style="display: inline-block; width: ${contents.imgURL == null?'98%':'67%'}; vertical-align: top;">
 										${contents.summary }<br /> ${contents.catagoryTag }<br />${contents.uploadTime}
