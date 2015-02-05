@@ -33,12 +33,13 @@
 									<h4>
 										<a href="${contents.linkURL }">${contents.title}</a>
 									</h4>
-									<div class="img" style="display: inline-block; width: 30%;">
+									<div class="img" style="display: inline-block; width: ${contents.imgURL == null?'2%':'30%'};">
 										<a href="${contents.linkURL }"><img
 											src="${contents.imgURL }" width="95%"></a><br />${contents.playTime}
 									</div>
+									TEST중 : ${contents.imgURL }<br/>
 									<div class="sammary"
-										style="display: inline-block; width: 67%; vertical-align: top;">
+										style="display: inline-block; width: ${contents.imgURL == null?'98%':'67%'}; vertical-align: top;">
 										${contents.summary }<br /> ${contents.catagoryTag }<br />${contents.uploadTime}
 									</div>
 								</div>

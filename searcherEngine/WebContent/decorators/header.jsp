@@ -98,15 +98,18 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<c:if test="${pageId!='/main.ap'}">
-				<form action="searchRequest.ap" method="post" class="navbar-form navbar-left" role="search">
-					<input type="text" class="form-control" placeholder="Search" name="param"
-						style="width: 350px;" value="${model.param}">
+				<form action="searchRequest.ap" method="post"
+					class="navbar-form navbar-left" role="search">
+					<input type="text" class="form-control" placeholder="Search"
+						name="param" style="width: 350px;" value="${model.param}">
 
 					<button type="submit" class="btn btn-default">
 						<i class="glyphicon glyphicon-search"></i>
 					</button>
 				</form>
 			</c:if>
+
+
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${user != null}">
 					<li><a href="#">'${user.name }' 님</a></li>
@@ -125,31 +128,30 @@
 				<c:if test="${empty user}">
 					<li><a href="#">'방문자' 님</a></li>
 				</c:if>
+				<c:if test="${pageId!='/main.ap'}">
 				<li>
 					<button type="button" id="category"
 						class="btn btn-default navbar-btn">
 						<i class="glyphicon glyphicon-plus" style="padding: 3px;"></i>
-					</button></li> 
-					<c:choose>
-						<c:when test="${empty user}">
-							<li><button type="button" id="loginModalBtn"
+					</button>
+				</li>
+				</c:if>
+				<c:choose>
+					<c:when test="${empty user}">
+						<li><button type="button" id="loginModalBtn"
 								class="btn btn-default navbar-btn">
 								<i class="glyphicon glyphicon-user" style="padding: 3px;"></i>
 							</button></li>
-						</c:when>
-						<c:otherwise>
+					</c:when>
+					<c:otherwise>
 
-							<li><button type="button" id="logout"
+						<li><button type="button" id="logout"
 								class="btn btn-default navbar-btn">
 								<i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i>
 							</button></li>
-						</c:otherwise>
+					</c:otherwise>
+				</c:choose>
 
-					</c:choose>
-
-
-
-				</li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

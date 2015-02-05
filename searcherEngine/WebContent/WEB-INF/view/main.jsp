@@ -8,19 +8,17 @@
 </head>
 <body>
 	<div id="main" style="text-align: center;">
-		<img src="img/main_logo.jpg" style="width: 40%; margin-bottom: 20px;">
+		<img src="img/main_logo.png" style="width: 35%; margin-bottom: 20px;">
 		<form action="searchRequest.ap" method="post" class="form-inline"
 			role="form">
-			<div class="form-group" style="width: 33%">
+			<div class="form-group" style="width: 30%">
 				<input type="text" name="param" class="form-control"
 					placeholder="Search">
 			</div>
-			<button type="submit" class="btn btn-default" style="width: 7%">
+			<button type="submit" class="btn btn-default" style="width: 5%;display: inline-block;">
 				<i class="glyphicon glyphicon-search"></i>
 			</button>
 		</form>
-
 	</div>
-
 </body>
 </html>
