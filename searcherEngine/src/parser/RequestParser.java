@@ -45,8 +45,13 @@ public abstract class RequestParser {
 			}	
 			break;
 		case Aution:
-			requestUrl.append("http://search.auction.co.kr/search/search.aspx?keyword=" + param + "&itemno=&nickname=&arraycategory=&frm=&dom=auction&isSuggestion=No&retry=&Fwk=" + param + "&acode=SRP_SU_0100&encKeyword=" + param);
-			break;
+			try {
+           			 requestUrl.append("http://search.auction.co.kr/search/search.aspx?keyword=" + URLEncoder.encode(param, "euc-kr") + "&itemno=&nickname=&arraycategory=&frm=&dom=auction&isSuggestion=No&retry=&Fwk=" + URLEncoder.encode(param, "euc-kr") + "&acode=SRP_SU_0100&encKeyword=" + URLEncoder.encode(param, "euc-kr"));
+        		 } catch (UnsupportedEncodingException e2) {
+          			  // TODO Auto-generated catch block
+          			  e2.printStackTrace();
+       			  }
+        		 break;
 		case Coupang:
 			requestUrl.append("http://www.coupang.com/np/search?q="+ param +"&channel=&eventCategory=GNB&eventLabel=search");
 			break;
