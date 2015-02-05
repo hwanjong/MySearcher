@@ -174,7 +174,6 @@ public class ShoppingParser extends RequestParser {
 			Elements Results;
 			String ImageLink, TitleLink;
 			Elements TitleName, Price, Content;
-			String Summary;
 
 			Results = doc.select("div.product-list ul li");
 			if (Results == null)
@@ -186,7 +185,6 @@ public class ShoppingParser extends RequestParser {
 				ImageLink = e.select("a img").attr("src");
 				TitleLink = e.select("a").attr("href");
 				TitleName = e.select("strong.title");
-				Summary = e.select("em.prod-price span").first().text().trim();
 				Price = e.select("span.price-detail");
 				Content = e.select("span.condition em");
 
@@ -201,11 +199,7 @@ public class ShoppingParser extends RequestParser {
 				str = "www.coupang.com" + TitleLink;
 				if (str != "" && str != " ")
 					content.setLinkURL(str);
-
-				str = Summary;
-				if (str != "" && str != " ")
-					content.setSummary(str);
-
+				
 				str = Price.text().trim();
 				if (str != "" && str != " ")
 					content.setPrice(str);
@@ -235,7 +229,6 @@ public class ShoppingParser extends RequestParser {
 			String ImageLink;
 			String TitleLink;
 			Elements TitleName, Price, Content;
-			String Summary;
 
 			Results = doc.select("ul.column4_v2 li");
 			if (Results == null)
@@ -247,7 +240,6 @@ public class ShoppingParser extends RequestParser {
 				ImageLink = e.select("a img").attr("src");
 				TitleLink = e.select("div.detail a").attr("href");
 				TitleName = e.select("div.detail a");
-				Summary = e.select("div.amounts p").first().text().trim();
 				Price = e.select("div.price");
 				Content = e.select("span.people");
 
@@ -263,10 +255,6 @@ public class ShoppingParser extends RequestParser {
 				str = "www.ticketmonster.co.kr" + TitleLink;
 				if (str != "" && str != " ")
 					content.setLinkURL(str);
-
-				str = Summary;
-				if (str != "" && str != " ")
-					content.setSummary(str);
 
 				str = Price.text().trim();
 				if (str != "" && str != " ")
