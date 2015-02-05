@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+
+	<resultMap type="User" id="userInfo">
+		<id column="user_id" property="userId" />
+		<id column="cur_page" property="curPage" />
+	</resultMap>
+
+	<resultMap type="Category" id="categoryInfo">
+		<id column="catagory_name" property="categoryName" />
+		<id column="logo_img" property="logImgURL" />
+	</resultMap>
+
+
+	<insert id="insertUser" parameterType="User">
+		insert into user
+		values(#{userId},#{pw},#{name},1)
+	</insert>
+
+	<insert id="addCategory">
+		insert into
+		user_set(user_id,catagory_name,page_num)
+		values(#{userId},#{category},#{curPage})
+	</insert>
+
+	<select id="isUser" parameterType="User" resultType="User"
+		resultMap="userInfo">
+		select * FROM User WHERE user_id = #{userId}
+	</select>
+
+	<select id="getUserInfo" parameterType="User" resultType="User"
+		resultMap="userInfo">
+		select * FROM User WHERE user_id = #{userId} and pw = #{pw}
+	</select>
+
+	<select id="getCurPageCategory" parameterType="User" resultType="Category"
+		resultMap="categoryInfo">
+		select c.catagory_name, c.logo_img from User u join user_set
+		s on (u.user_id = s.user_id) join catagory c on
+		(s.catagory_name=c.catagory_name) where u.user_id =#{userId} and
+		u.cur_page = s.page_num
+	</select>
+	<select id="getCurPage" parameterType="User" resultType="int">
+		select
+		cur_page from user where user_id=#{userId}
+	</select>
+
+</mapper>

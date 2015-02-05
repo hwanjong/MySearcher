@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+html,body {
+	height: 100%;
+	background-color: #FFFFDF;
+	font-family: "Jeju Gothic", "Hanna", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	overflow-x: hidden;
+}
+
+#container {
+	margin: 10 20px auto;
+	padding: 40px 30px;
+	width: 100%;
+	height: 2000px;
+	background-color: yellow;
+}
+
+#headDiv {
+	padding: 20px;
+	40
+	px;
+}
+
+.subContainer {
+	margin: 20px 20px;
+	width: 550px;
+	height: 800px;
+	display: inline-block;
+	background-color: white;
+	border: 1px groove;
+	overflow: auto;
+}
+
+#categoryBox {
+	position: fixed;
+	left: 30%;
+	top: 30%;
+	width: 500px;
+	height: 300px;
+	display: none;
+	background-color:white;
+	border: 1px solid;
+}
