@@ -38,7 +38,7 @@ nav ul li{
 	height: 600px;
 	background-color: white;
 	overflow: auto;
-	margin: 10px;
+	padding: 5px;
 }
 
 #categoryBox {

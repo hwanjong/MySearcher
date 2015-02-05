@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><decorator:title default="Picker" /></title>
+<title><decorator:title default="검색을 내마음대로-Picker" /></title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
 				$.post("/searcherEngine/addCategory.ap", {
 					category : id,
 				}, function(data) {
-					alert("결과수신");
+					alert("추가성공");
 					var result = '${model.result}';
 					$("#ajaxLoading").hide();
 				});

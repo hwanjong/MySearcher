@@ -25,20 +25,20 @@
 						<c:choose>
 							<c:when test="${contents.widthSize!=null }">
 								<a href="${contents.linkURL }"><img
-									src="${contents.imgURL }" width="${contents.widthSize}"></a>
+									src="${contents.imgURL }" width="${contents.widthSize}" style="margin: 1px;"></a>
 							</c:when>
 							<c:otherwise>
 
 								<div class="alert alert-success">
-									<h3>
+									<h4>
 										<a href="${contents.linkURL }">${contents.title}</a>
-									</h3>
+									</h4>
 									<div class="img" style="display: inline-block; width: 30%;">
 										<a href="${contents.linkURL }"><img
 											src="${contents.imgURL }" width="95%"></a><br />${contents.playTime}
 									</div>
 									<div class="sammary"
-										style="display: inline-block; width: 68%; vertical-align: top;">
+										style="display: inline-block; width: 67%; vertical-align: top;">
 										${contents.summary }<br /> ${contents.catagoryTag }<br />${contents.uploadTime}
 									</div>
 								</div>
