@@ -40,7 +40,6 @@ public abstract class RequestParser {
 			try {
 				requestUrl.append("http://search.11st.co.kr/SearchPrdAction.tmall?method=getTotalSearchSeller&targetTab=T&isGnb=Y&prdType=&category=&cmd=&pageSize=&lCtgrNo=&mCtgrNo=&sCtgrNo=&dCtgrNo=&fromACK=&semanticFromGNB=&gnbTag=TO&schFrom=&ID=&ctgrNo=&srCtgrNo=&kwd=" + URLEncoder.encode(param, "euc-kr") + "&adUrl=&adKwdTrcNo=1201501303512018906&adPrdNo=1140687850");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 			break;
@@ -48,7 +47,6 @@ public abstract class RequestParser {
 			try {
            			 requestUrl.append("http://search.auction.co.kr/search/search.aspx?keyword=" + URLEncoder.encode(param, "euc-kr") + "&itemno=&nickname=&arraycategory=&frm=&dom=auction&isSuggestion=No&retry=&Fwk=" + URLEncoder.encode(param, "euc-kr") + "&acode=SRP_SU_0100&encKeyword=" + URLEncoder.encode(param, "euc-kr"));
         		 } catch (UnsupportedEncodingException e2) {
-          			  // TODO Auto-generated catch block
           			  e2.printStackTrace();
        			  }
         		 break;
@@ -62,7 +60,6 @@ public abstract class RequestParser {
 			try {
 				requestUrl.append("https://github.com/search?utf8=%E2%9C%93&q=" + URLEncoder.encode(param, "utf-8"));
 			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -76,7 +73,6 @@ public abstract class RequestParser {
 			try {
 				requestUrl.append("http://stackoverflow.com/search?q=" + URLEncoder.encode(param, "utf-8"));
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -84,7 +80,6 @@ public abstract class RequestParser {
 			try {
 				requestUrl.append("http://ko.wikipedia.org/w/index.php?title=%ED%8A%B9%EC%88%98%3A%EA%B2%80%EC%83%89&profile=default&search=" + URLEncoder.encode(param, "utf-8")+ "&fulltext=Search");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;

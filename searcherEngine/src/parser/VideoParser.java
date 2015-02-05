@@ -40,6 +40,7 @@ public class VideoParser extends RequestParser {
 			Elements eLists = source.select("ol.item-section > li");
 
 			Element sub = null;
+			Elements subs = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
 				sub = e.select("h3.yt-lockup-title > a[href]").first();
@@ -58,22 +59,9 @@ public class VideoParser extends RequestParser {
 				if (sub != null)
 					content.setTitle(sub.text());
 
-				/*
-				 * sub = e.select("h3.yt-lockup-title > a[href]").first();
-				 * if(sub != null) content.setByline(sub.text());
-				 * 
-				 * sub = e.select("div.yt-lockup-byline > a[href]").first();
-				 * if(sub != null) content.setBylineLink(sub.attr("href"));
-				 */
-
-				sub = e.select("ul.yt-lockup-meta-info > li").get(0);
-				if (sub != null) {
-					content.setUploadTime(sub.text());
-					sub = e.select("ul.yt-lockup-meta-info > li").get(1);
-					if (sub != null)
-						content.setUploadTime(content.getUploadTime()
-								+ sub.text());
-				}
+				subs = e.select("ul.yt-lockup-meta-info > li");
+				if (subs != null)
+					content.setUploadTime(subs.get(0).text() + " · " + subs.get(1).text());
 
 				sub = e.select(
 						"div.yt-lockup-description.yt-ui-ellipsis.yt-ui-ellipsis-2")
