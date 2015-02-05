@@ -41,6 +41,7 @@ public class VideoParser extends RequestParser {
 
 			Element sub = null;
 			Elements subs = null;
+			String temp = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
 				sub = e.select("h3.yt-lockup-title > a[href]").first();
@@ -48,9 +49,14 @@ public class VideoParser extends RequestParser {
 					content.setLinkURL("http://www.youtube.com" + sub.attr("href"));
 
 				sub = e.select("div.yt-thumb.video-thumb > img").first();
-				if (sub != null)
-					content.setImgURL(sub.attr("src"));
-
+				if (sub != null) {
+					temp = sub.attr("data-thumb");
+					if(temp != "")
+						content.setImgURL(temp);
+					else
+						content.setImgURL(sub.attr("src"));
+					temp = null;
+				}
 				sub = e.select("span.video-time").first();
 				if (sub != null)
 					content.setPlayTime(sub.text());
