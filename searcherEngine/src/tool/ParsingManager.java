@@ -2,7 +2,6 @@ package tool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale.Category;
 
 import parser.BlogParser;
 import parser.CommunityParser;

@@ -9,7 +9,7 @@ public class constants {
 		ElevenST, Aution, Timon, Coupang,
 		GitHub, StackOverFlow,
 		NatePann, NaverKin,
-		Wikipedia
+		Wikipedia, CyworldBlog, MBCNews
 	}
 	public enum types{
 		vidio,news,blog,image,shopping,develop,community,dictionary;
@@ -19,10 +19,10 @@ public class constants {
 		NaverTVcast, YouTube, PandoraTV;
 	}
 	public enum news{
-		NaverNews;
+		NaverNews, MBCNews;
 	}
 	public enum blog{
-		NaverBlog;
+		NaverBlog, CyworldBlog;
 	}
 	public enum image{
 		GoogleImage;

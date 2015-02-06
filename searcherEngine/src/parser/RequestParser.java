@@ -30,6 +30,16 @@ public abstract class RequestParser {
 			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://news.naver.com/main/search/search.nhn?query=" + param);
 			break;
+		case MBCNews:
+			try {	param = URLEncoder.encode(param, "euc-kr");	} 
+			catch (UnsupportedEncodingException e2) {}
+			requestUrl.append("http://search.imnews.imbc.com:8080/mbc/search.jsp?sort=d&kwd=" + param);
+			break;
+		case CyworldBlog:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
+			requestUrl.append("http://www.cyworld.com/search/search_blog_post.asp?searchword=" + param + "&page=1");
+			break;
 		case NaverBlog:
 			requestUrl.append("http://section.blog.naver.com/sub/SearchBlog.nhn?type=post&option.keyword=" + param);
 			break;
