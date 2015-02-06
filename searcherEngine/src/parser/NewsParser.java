@@ -19,6 +19,9 @@ public class NewsParser extends RequestParser {
 		case NaverNews:
 			contents = getNaverNewsContents(url);
 			break;
+		case MBCNews:
+			contents = getMBCNewsContents(url);
+			break;
 		default:
 			break;
 		}
@@ -68,6 +71,51 @@ public class NewsParser extends RequestParser {
 
 				count++;
 			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return list;
+	}
+	
+	private ArrayList<SubContents> getMBCNewsContents(String url) {
+		ArrayList<SubContents> list = new ArrayList<SubContents>();
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).timeout(5000).get();
+			Elements Results; 
+			String ImageLink, TitleLink;
+			Elements TitleName, Press, Content;
+			
+			Results = doc.select("li.list-type1");
+		    if(Results == null) return list;
+		    
+		    for(Element e: Results)
+		    {
+		    	SubContents content = new SubContents();
+		    	
+		    	ImageLink = e.select("img.some_img").attr("src");
+	       	 	TitleLink = e.getElementsByClass("a.img_wrap").attr("href");
+	       	 	TitleName = e.select("dt.article_tit a");
+	       	 	Content = e.select("dd.article-con a");
+	       	 	Press = e.select("span.reporter");
+		        	 
+	       	 	String str = ImageLink;
+	       	 	if(str != "" && str != " ")	content.setImgURL(str);
+		    	
+	       	 	str = TitleLink;
+		        if(str != "" && str != " ")	content.setLinkURL(str);
+		        
+		    	str = TitleName.text().trim();
+		    	if(str != "" && str != " ")	content.setTitle(str);
+		        
+		        str = Press.text().trim();
+		        if(str != "" && str != " ")	content.setReference(str);
+		        
+		        str = Content.text().trim();
+		        if(str != "" && str != " ")	content.setSummary(str);
+		        
+		        list.add(content);
+		    }
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
