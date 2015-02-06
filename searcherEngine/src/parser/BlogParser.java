@@ -36,7 +36,7 @@ public class BlogParser extends RequestParser {
 			doc = Jsoup.connect(url).timeout(5000).get();
 
 			String TitleLink;
-			Elements Results, TitleName, Press, Content;
+			Elements Results, TitleName, Press, Content, Date;
 
 			Results = doc.select("ul.search_list li");
 			if (Results == null)
@@ -49,6 +49,7 @@ public class BlogParser extends RequestParser {
 				TitleLink = e.select("h5 a").attr("href");
 				TitleName = doc.select("ul.search_list li h5");
 				Content = doc.getElementsByClass("list_content");
+				Date = doc.getElementsByClass("Date");
 				Press = doc.getElementsByClass("category");
 
 		    	String str = TitleName.get(count).text().trim();
@@ -62,6 +63,9 @@ public class BlogParser extends RequestParser {
 		        
 		        str = Content.get(count).text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
+		        
+		        str = Date.get(count).text().trim();
+		        if(str != "" && str != " ")	content.setUploadTime(str);
 
 				count++;
 
@@ -81,7 +85,7 @@ public class BlogParser extends RequestParser {
 			doc = Jsoup.connect(url).timeout(5000).get();
 
 			String TitleLink, Press;
-			Elements Results, TitleName, Content;
+			Elements Results, TitleName, Content, Date;
 
 			Results = doc.select("ul.type-mp li dl");
 			if (Results == null)
@@ -92,7 +96,8 @@ public class BlogParser extends RequestParser {
 
 				TitleLink = e.select("dt a").attr("href");
 				TitleName = e.select("dt a");
-				Content = e.getElementsByClass("search-content");
+				Content = e.select("dd.search-content");
+				Date = e.select("dd.text-inline");
 				Press = e.select("a.url").attr("href");
 
 				String str = TitleLink;
@@ -100,6 +105,9 @@ public class BlogParser extends RequestParser {
 		        
 		    	str = TitleName.text().trim();
 		        if(str != "" && str != " ") content.setTitle(str);
+		        
+		        str = Date.text().trim();
+		        if(str != "" && str != " ")	content.setUploadTime(str);
 		        
 		        str = Content.text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
