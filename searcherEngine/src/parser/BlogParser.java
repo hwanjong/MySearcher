@@ -83,6 +83,11 @@ public class BlogParser extends RequestParser {
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).get();
+			if(doc.select("div.error_wrap").text().trim() != null) 
+			{
+				System.out.println("사이트 자체 오류");
+				doc = Jsoup.connect(url).get();
+			}
 
 			String TitleLink, Press;
 			Elements Results, TitleName, Content, Date;
