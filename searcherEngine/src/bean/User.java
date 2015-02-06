@@ -1,10 +1,8 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class User implements Serializable{
-
 	String userId;
 	String pw;
 	
