@@ -35,7 +35,7 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).timeout(5000).get();
+			source = Jsoup.connect(url).get();
 
 			Elements eLists = source.select("ol.item-section > li");
 
@@ -87,7 +87,7 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).timeout(5000).get();
+			doc = Jsoup.connect(url).get();
 			Elements Results;
 			String TitleName, ImageLink, TitleLink,Summary;
 			Elements Press, Time;
@@ -141,7 +141,7 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).timeout(5000).get();
+			source = Jsoup.connect(url).get();
 
 			Elements eLists = source.select("div.group_srch.vdlst_hot > div.srch_list");
 
