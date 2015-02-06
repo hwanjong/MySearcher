@@ -21,12 +21,15 @@ public class DeveloperParser extends RequestParser {
 		case StackOverFlow:
 			contents = getStackOverFlowContents(url);
 			break;
+		case AndroidPub:
+			contents = getAndroidPubContents(url);
+			break;
 		default:
 			break;
 		}
 		return contents;
 	}
-	
+
 	private ArrayList<SubContents> getStackOverFlowContents(String url) {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
@@ -37,16 +40,6 @@ public class DeveloperParser extends RequestParser {
 			Element sub = null;
 			Elements subs = null;
 			for (Element e : eLists) {
-				/*
-				 * subs = e.select("div.stats > div"); sub = subs.first();
-				 * if(sub != null) {
-				 * content.setVotes(sub.getElementsByTag("strong").text()); sub
-				 * = e.select("div.viewcount").first(); if(sub != null)
-				 * content.setVotes(content.getVotes() + " " + sub.text());
-				 * if(subs.size() > 1) { sub = subs.get(1);
-				 * content.setAnswers(sub.getElementsByTag("strong").text() +
-				 * " answers"); } subs = null; }
-				 */
 				SubContents content = new SubContents();
 				sub = e.select("div.result-link > span > a").first();
 				if (sub != null)
@@ -120,6 +113,43 @@ public class DeveloperParser extends RequestParser {
 				 * sub = e.select("div.repo-list-stats").first(); if(sub !=
 				 * null) { content.setCatagoryTag(sub.text()); }
 				 */
+				contentsList.add(content);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return contentsList;
+	}
+	
+	private ArrayList<SubContents> getAndroidPubContents(String url) {
+		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+		Document source = null;
+		try {
+			source = Jsoup.connect(url).timeout(5000).get();
+			Elements eLists = source.select("div.qa-q-list > qa-q-list-item");
+
+			Element sub = null;
+			Elements subs = null;
+			for (Element e : eLists) {
+				SubContents content = new SubContents();
+				
+				sub = e.select("div.qa-q-item-title > a").first();
+				if (sub != null) {
+					content.setTitle(sub.text());
+					content.setLinkURL("http://www.masterqna.com/android/" + sub.attr("href"));
+				}
+				
+				subs = e.select("ul.dqa-q-item-tag-list > li");
+				if (subs != null) {
+					for(Element e1 : subs) {
+						content.setCatagoryTag(content.getCatagoryTag() + e1.select("a.qa-tag-link").text());
+					}
+				}
+				
+				sub = e.select("span.qa-q-item-when-data").first();
+				if (sub != null)
+					content.setUploadTime(sub.text());
+					
 				contentsList.add(content);
 			}
 		} catch (Exception e) {
