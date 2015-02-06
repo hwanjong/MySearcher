@@ -34,7 +34,7 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).timeout(5000).get();
+			source = Jsoup.connect(url).get();
 			Elements eLists = source.select("div.question-summary.search-result");
 
 			Element sub = null;
@@ -82,7 +82,7 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).timeout(5000).get();
+			source = Jsoup.connect(url).get();
 			Elements eLists = source.select("ul.repo-list.js-repo-list > li");
 
 			Element sub = null;
@@ -125,7 +125,7 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).timeout(5000).get();
+			source = Jsoup.connect(url).get();
 			Elements eLists = source.select("div.qa-q-list > qa-q-list-item");
 
 			Element sub = null;

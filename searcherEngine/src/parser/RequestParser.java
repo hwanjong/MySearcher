@@ -36,8 +36,6 @@ public abstract class RequestParser {
 			requestUrl.append("http://search.imnews.imbc.com:8080/mbc/search.jsp?sort=d&kwd=" + param);
 			break;
 		case CyworldBlog:
-			try {	param = URLEncoder.encode(param, "UTF-8");	} 
-			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://www.cyworld.com/search/search_blog_post.asp?searchword=" + param + "&page=1");
 			break;
 		case NaverBlog:
