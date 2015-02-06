@@ -17,12 +17,18 @@ public abstract class RequestParser {
 		switch (c) 
 		{
 		case NaverTVcast:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://tvcast.naver.com/search?query=" + param);
 			break;
 		case YouTube:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("https://www.youtube.com/results?search_query=" + param);
 			break;
 		case PandoraTV:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://search.pandora.tv/?&query=" + param);
 			break;
 		case NaverNews:
@@ -41,9 +47,13 @@ public abstract class RequestParser {
 			requestUrl.append("http://www.cyworld.com/search/search_blog_post.asp?searchword=" + param + "&page=1");
 			break;
 		case NaverBlog:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://section.blog.naver.com/sub/SearchBlog.nhn?type=post&option.keyword=" + param);
 			break;
 		case GoogleImage:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("https://www.google.co.kr/search?q=" + param + "&newwindow=1&source=lnms&tbm=isch&sa=X&ei=fZ3LVIWWDM-j8AWRp4LgBg&ved=0CAgQ_AUoAQ&biw=871&bih=808&dpr=0.9");
 			break;
 		case ElevenST:
@@ -61,9 +71,13 @@ public abstract class RequestParser {
        			  }
         		 break;
 		case Coupang:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://www.coupang.com/np/search?q="+ param +"&channel=&eventCategory=GNB&eventLabel=search");
 			break;
 		case Timon:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://www.ticketmonster.co.kr/search/?keyword=" + param + "&keyword_view=" + param + "&uis=6b87db6a&sarea=g&st=0");
 			break;
 		case GitHub:
@@ -74,9 +88,13 @@ public abstract class RequestParser {
 			}
 			break;
 		case NaverKin:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://kin.naver.com/search/list.nhn?cs=utf8&query=" + param);
 			break;
 		case NatePann:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e2) {}
 			requestUrl.append("http://pann.nate.com/search/pann?q=" + param);
 			break;
 		case StackOverFlow:
