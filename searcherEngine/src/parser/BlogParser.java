@@ -32,9 +32,8 @@ public class BlogParser extends RequestParser {
 		try {
 			doc = Jsoup.connect(url).timeout(5000).get();
 
-			Elements Results, ImageLink;
 			String TitleLink;
-			Elements TitleName, Press, Content;
+			Elements Results, TitleName, Press, Content;
 
 			Results = doc.select("ul.search_list li");
 			if (Results == null)
@@ -44,17 +43,12 @@ public class BlogParser extends RequestParser {
 			for (Element e : Results) {
 				SubContents content = new SubContents();
 
-				ImageLink = e.getElementsByClass("thumb");
 				TitleLink = e.select("h5 a").attr("href");
 				TitleName = doc.select("ul.search_list li h5");
 				Content = doc.getElementsByClass("list_content");
 				Press = doc.getElementsByClass("category");
 
-				String str = ImageLink.attr("src");
-		        str = str.split("jpg")[0];
-		        if(str != "" && str != " ")   content.setImgURL(str + "jpg");
-		    	
-		    	str = TitleName.get(count).text().trim();
+		    	String str = TitleName.get(count).text().trim();
 		        if(str != "" && str != " ") content.setTitle(str);
 		        
 		        str = TitleLink;
