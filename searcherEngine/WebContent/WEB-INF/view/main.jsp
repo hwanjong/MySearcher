@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#mainLogo").attr("src","img/main_logo_"+parseInt(Math.random()*3)+".png");
+	$("#mainLogo").attr("src","img/main_logo_"+parseInt(Math.random()*6)+".png");
 });
 </script>
 

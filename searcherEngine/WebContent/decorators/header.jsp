@@ -135,13 +135,6 @@
 						<img src="img/add_category.png" style="width: 20px; height: 20px;">
 					</button>
 				</li>
-					<li>
-						<button type="button" id="category"
-							class="btn btn-default navbar-btn">
-							<!-- <i class="glyphicon glyphicon-plus" style="padding: 3px;"></i> -->
-							<img src="img/add_category.png" style="width: 20px;">
-						</button>
-					</li>
 				</c:if>
 				<c:choose>
 					<c:when test="${empty user}">
