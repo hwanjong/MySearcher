@@ -89,7 +89,7 @@ public class VideoParser extends RequestParser {
 		try {
 			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
-			String TitleName, ImageLink, TitleLink;
+			String TitleName, ImageLink, TitleLink,Summary;
 			Elements Press, Time;
 
 			Results = doc.select("div._infiniteCardArea div a");
@@ -103,11 +103,11 @@ public class VideoParser extends RequestParser {
 				ImageLink = e.select("p.cds_thm img").attr("src");
 				TitleLink = e.attr("href");
 				TitleName = e.select("p.cds_thm img").attr("alt");
+				Summary = "조회수 : " + e.select("span.cnp").text().trim() + " 좋아요 : " + e.select("span.bch").text().trim();
 				Press = doc.getElementsByClass("ch_txt");
 				Time = doc.getElementsByClass("tm_b");
 
 				String str = ImageLink;
-
 		    	if(str != "" && str != " ")	content.setImgURL(str);
 		    	
 		    	str = TitleName;
@@ -116,8 +116,11 @@ public class VideoParser extends RequestParser {
 		    	str = "http://tvcast.naver.com" + TitleLink;
 		    	if(str != "" && str != " ")	content.setLinkURL(str);
 		    	
+		    	str = Summary;
+		    	if(str != "" && str != " ")	content.setSummary(str);
+		    	
 		    	str = Press.get(count).text().trim();
-		    	if(str != "" && str != " ")	content.setReference(str);
+		    	if(str != "" && str != " ")	content.setPlayTime(str);
 		    	
 		    	str = Time.get(count).text().trim();
 		        content.setPlayTime(str);
