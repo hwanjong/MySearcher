@@ -11,12 +11,14 @@
 
 </head>
 <body>
+	<i class="glyphicon glyphicon-chevron-left"
+		style="vertical-align: top;"></i>
 	<div id="container">
 		<c:forEach var="category" items="${model.curPageCategoryList}">
 			<div class="subContainer">
 				<div class="logoContainer">
 					<img src="${category.logImgURL }" style="width: 150px;">
-					
+
 					<%-- <h3 style="display: inline-block;">
 						<a href="${category.searchURL }"> 검색결과 더보기 >></a>
 					</h3> --%>
@@ -25,22 +27,29 @@
 					<c:forEach var="contents" items="${category.contentsList}">
 						<c:choose>
 							<c:when test="${contents.widthSize!=null }">
-								<a href="${contents.linkURL }"><img
-									src="${contents.imgURL }" width="${contents.widthSize}" style="margin: 1px;"></a>
+								<a target="_blank" href="${contents.linkURL }"><img
+									src="${contents.imgURL }" height="100px;"
+									style="margin: 1px;"></a>
 							</c:when>
 							<c:otherwise>
 
 								<div class="alert alert-success">
 									<h4>
-										<a href="${contents.linkURL }">${contents.title}</a>
+										<a target="_blank" href="${contents.linkURL }">${contents.title}</a>
 									</h4>
-									<div class="img" style="display: inline-block; width: ${contents.imgURL == null?'2%':'32%'};">
-										<a href="${contents.linkURL }"><img
-											src="${contents.imgURL }" width="95%"></a><span class="pull-right" style="padding:1px; font-size:8px; background-color: black; color: white; margin-top: -17px; margin-right:10px; position:relative; z-index: 1;">${contents.playTime}</span>
+									<div class="img"
+										style="display: inline-block; width: ${contents.imgURL == null?'2%':'32%'};">
+										<a target="_blank" href="${contents.linkURL }"><img
+											src="${contents.imgURL }" width="95%"></a>
+										<c:if test="${contents.playTime!=null}">
+											<span class="pull-right"
+												style="padding: 1px; font-size: 8px; background-color: black; color: white; margin-top: -17px; margin-right: 10px; position: relative; z-index: 1;">${contents.playTime}</span>
+										</c:if>
 									</div>
 									<div class="sammary"
 										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top;">
-										${contents.summary }<br /> ${contents.catagoryTag } ${contents.uploadTime}
+										${contents.summary }<br /> ${contents.catagoryTag }
+										${contents.uploadTime}
 									</div>
 								</div>
 							</c:otherwise>
@@ -48,14 +57,15 @@
 					</c:forEach>
 				</div>
 				<div class="moreContainer">
-					 <h4 class="pull-right">
-						<a href="${category.searchURL }"> 검색결과 더보기 >></a>
+					<h4 class="pull-right">
+						<a target="_blank" href="${category.searchURL }"> 검색결과 더보기 >></a>
 					</h4>
 				</div>
 
 			</div>
 		</c:forEach>
 	</div>
+	<i class="glyphicon glyphicon-chevron-right" style="vertical-align: top;"></i>
 
 </body>
 
