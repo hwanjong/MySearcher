@@ -34,18 +34,23 @@
 									<h4>
 										<a href="${contents.linkURL }">${contents.title}</a>
 									</h4>
-									<div class="img" style="display: inline-block; width: ${contents.imgURL == null?'2%':'30%'};">
+									<div class="img" style="display: inline-block; width: ${contents.imgURL == null?'2%':'32%'};">
 										<a href="${contents.linkURL }"><img
-											src="${contents.imgURL }" width="95%"></a><br />${contents.playTime}
+											src="${contents.imgURL }" width="95%"></a><span class="pull-right" style="padding:1px; font-size:8px; background-color: black; color: white; margin-top: -17px; margin-right:10px; position:relative; z-index: 1;">${contents.playTime}</span>
 									</div>
 									<div class="sammary"
-										style="display: inline-block; width: ${contents.imgURL == null?'98%':'67%'}; vertical-align: top;">
-										${contents.summary }<br /> ${contents.catagoryTag }<br />${contents.uploadTime}
+										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top;">
+										${contents.summary }<br /> ${contents.catagoryTag } ${contents.uploadTime}
 									</div>
 								</div>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
+				</div>
+				<div class="moreContainer">
+					 <h4 class="pull-right">
+						<a href="${category.searchURL }"> 검색결과 더보기 >></a>
+					</h4>
 				</div>
 
 			</div>
