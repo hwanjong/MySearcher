@@ -5,14 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script type="text/javascript">
-	
+$(document).ready(function() {
+	$("#prev").hover(
+		function(){
+			$(this).attr("src","img/prev2.png");
+		},
+	function(){
+		$(this).attr("src","img/prev.png");
+	});
+});
 </script>
 
 </head>
 <body>
-	<i class="glyphicon glyphicon-chevron-left"
-		style="vertical-align: top;"></i>
+	<a href="#"><img id="prev" class="pull-left" src="img/prev.png"
+		style="position: fixed; top: 50%; margin-left: 10px; width: 50px;"></a>
 	<div id="container">
 		<c:forEach var="category" items="${model.curPageCategoryList}">
 			<div class="subContainer">
@@ -28,8 +37,7 @@
 						<c:choose>
 							<c:when test="${contents.widthSize!=null }">
 								<a target="_blank" href="${contents.linkURL }"><img
-									src="${contents.imgURL }" height="100px;"
-									style="margin: 1px;"></a>
+									src="${contents.imgURL }" height="100px;" style="margin: 1px;"></a>
 							</c:when>
 							<c:otherwise>
 
@@ -65,8 +73,8 @@
 			</div>
 		</c:forEach>
 	</div>
-	<i class="glyphicon glyphicon-chevron-right" style="vertical-align: top;"></i>
-
+	<a href="#"><img src="img/next.png"
+		style="position: fixed; top: 50%; right: 10px; margin-right: 10px; width: 50px;"></a>
 </body>
 
 </html>

@@ -133,7 +133,7 @@
 					<button type="button" id="category"
 						class="btn btn-default navbar-btn">
 						<!-- <i class="glyphicon glyphicon-plus" style="padding: 3px;"></i> -->
-						<img src="img/add_category.png" style="width: 20px;">
+						<img src="img/add_category.png" style="width: 20px; height: 20px;">
 					</button>
 				</li>
 				</c:if>
@@ -149,7 +149,7 @@
 						<li><button type="button" id="logout"
 								class="btn btn-default navbar-btn">
 								<!-- <i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i> -->
-								<img src="img/logout.png" style="width: 20px;">
+								<img src="img/logout.png" style="width: 20px; height: 20px;">
 							</button></li>
 					</c:otherwise>
 				</c:choose>

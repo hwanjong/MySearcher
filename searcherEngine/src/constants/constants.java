@@ -12,7 +12,7 @@ public class constants {
 		Wikipedia, CyworldBlog, MBCNews
 	}
 	public enum types{
-		vidio,news,blog,image,shopping,develop,community,dictionary, game;
+		vidio,news,blog,image,shopping,develop,community,dictionary;
 	}
 	
 	public enum vidio{
