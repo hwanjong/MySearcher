@@ -35,7 +35,7 @@ public class NewsParser extends RequestParser {
 			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink, TitleLink;
-			Elements TitleName, Press, Content;
+			Elements TitleName, Press, Content, Date;
 
 			Results = doc.select("ul.srch_lst");
 			if (Results == null)
@@ -47,22 +47,22 @@ public class NewsParser extends RequestParser {
 
 				ImageLink = e.select("a.thmb img").attr("src");
 				TitleLink = e.getElementsByClass("tit").attr("href");
+				Date = e.select("div.info span");
 				TitleName = doc.getElementsByClass("tit");
 				Content = doc.getElementsByClass("dsc");
 				Press = doc.getElementsByClass("press");
 
 				String str = ImageLink;
-
 	       	 	if(str != "" && str != " ")	content.setImgURL(str);
 		    	
 		    	str = TitleName.get(count).text().trim();
 		    	if(str != "" && str != " ")	content.setTitle(str);
 		        
+		    	str = Date.get(1).text().trim() + " " + Date.get(3).text().trim();
+		    	if(str != "" && str != " ")	content.setUploadTime(str);
+		    	
 		        str = TitleLink;
 		        if(str != "" && str != " ")	content.setLinkURL(str);
-		        
-		        str = Press.get(count).text().trim();
-		        if(str != "" && str != " ")	content.setReference(str);
 		        
 		        str = Content.get(count).text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
@@ -84,7 +84,7 @@ public class NewsParser extends RequestParser {
 			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results; 
 			String ImageLink, TitleLink;
-			Elements TitleName, Press, Content;
+			Elements TitleName, Press, Content, Date;
 			
 			Results = doc.select("li.list-type1");
 		    if(Results == null) return list;
@@ -98,6 +98,7 @@ public class NewsParser extends RequestParser {
 	       	 	TitleName = e.select("dt.article_tit a");
 	       	 	Content = e.select("dd.article-con a");
 	       	 	Press = e.select("span.reporter");
+	       	 	Date = e.select("dd.article-date");
 		        	 
 	       	 	String str = ImageLink;
 	       	 	if(str != "" && str != " ")	content.setImgURL(str);
@@ -107,9 +108,9 @@ public class NewsParser extends RequestParser {
 		        
 		    	str = TitleName.text().trim();
 		    	if(str != "" && str != " ")	content.setTitle(str);
-		        
-		        str = Press.text().trim();
-		        if(str != "" && str != " ")	content.setReference(str);
+		                
+		        str = Date.text().trim();
+		        if(str != "" && str != " ")	content.setUploadTime(str);
 		        
 		        str = Content.text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
