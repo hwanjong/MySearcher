@@ -3,13 +3,13 @@ package constants;
 public class constants {
 	public enum UserRequest {
 		NaverTVcast, YouTube, PandoraTV, 
-		NaverNews, 
-		NaverBlog, 
+		NaverNews, MBCNews,
+		NaverBlog, CyworldBlog,
 		GoogleImage, 
 		ElevenST, Aution, Timon, Coupang,
-		GitHub, StackOverFlow,
+		GitHub, StackOverFlow, AndroidPub,
 		NatePann, NaverKin,
-		Wikipedia, CyworldBlog, MBCNews
+		Wikipedia
 	}
 	public enum types{
 		vidio,news,blog,image,shopping,develop,community,dictionary;
@@ -31,7 +31,7 @@ public class constants {
 		ElevenST, Aution, Timon, Coupang;
 	}
 	public enum develop{
-		GitHub, StackOverFlow;	
+		GitHub, StackOverFlow, AndroidPub;	
 	}
 	public enum community{
 		NatePann, NaverKin;

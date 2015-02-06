@@ -91,13 +91,13 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main.ap"><img
-				src="img/head_logo.png" style="width: 100px;"></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<c:if test="${pageId!='/main.ap'}">
+				<a class="navbar-brand" href="main.ap"><img
+					src="img/head_logo.png" style="width: 100px;"></a>
 				<form action="searchRequest.ap" method="post"
 					class="navbar-form navbar-left" role="search">
 					<input type="text" class="form-control" placeholder="Search"
@@ -108,7 +108,6 @@
 					</button>
 				</form>
 			</c:if>
-
 
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${user != null}">
@@ -136,6 +135,13 @@
 						<img src="img/add_category.png" style="width: 20px; height: 20px;">
 					</button>
 				</li>
+					<li>
+						<button type="button" id="category"
+							class="btn btn-default navbar-btn">
+							<!-- <i class="glyphicon glyphicon-plus" style="padding: 3px;"></i> -->
+							<img src="img/add_category.png" style="width: 20px;">
+						</button>
+					</li>
 				</c:if>
 				<c:choose>
 					<c:when test="${empty user}">
@@ -263,11 +269,13 @@
 			</div>
 			<div class="tab-pane fade" id="news">
 				<img class="addCategory" id="NaverNews"
-					src="img/logo_icon/naverNews.png">
+					src="img/logo_icon/naverNews.png"> <img class="addCategory"
+					id="MBCNews" src="img/logo_icon/mbcNews.png">
 			</div>
 			<div class="tab-pane fade" id="blog">
 				<img class="addCategory" id="NaverBlog"
-					src="img/logo_icon/naverBlog.png">
+					src="img/logo_icon/naverBlog.png"> <img class="addCategory"
+					id="CyworldBlog" src="img/logo_icon/CyworldBlog.png">
 			</div>
 			<div class="tab-pane fade" id="image">
 				<img class="addCategory" id="GoogleImage"
@@ -284,7 +292,10 @@
 			<div class="tab-pane fade" id="develop">
 				<img class="addCategory" id="GitHub" src="img/logo_icon/Github.png"><img
 					class="addCategory" id="StackOverFlow"
-					src="img/logo_icon/Stackoverflow.png">
+					src="img/logo_icon/Stackoverflow.png"><img
+					class="addCategory" id="AndroidPub"
+					src="img/logo_icon/AndroidPub.png">
+
 			</div>
 			<div class="tab-pane fade" id="community">
 				<img class="addCategory" id="NatePann"
