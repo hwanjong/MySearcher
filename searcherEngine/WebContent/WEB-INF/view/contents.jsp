@@ -15,6 +15,13 @@ $(document).ready(function() {
 	function(){
 		$(this).attr("src","img/prev.png");
 	});
+	$("#next").hover(
+			function(){
+				$(this).attr("src","img/next2.png");
+			},
+		function(){
+			$(this).attr("src","img/next.png");
+		});
 });
 </script>
 
@@ -73,7 +80,7 @@ $(document).ready(function() {
 			</div>
 		</c:forEach>
 	</div>
-	<a href="#"><img src="img/next.png"
+	<a href="#"><img id="next" src="img/next.png"
 		style="position: fixed; top: 50%; right: 10px; margin-right: 10px; width: 50px;"></a>
 </body>
 

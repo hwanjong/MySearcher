@@ -140,7 +140,8 @@
 					<c:when test="${empty user}">
 						<li><button type="button" id="loginModalBtn"
 								class="btn btn-default navbar-btn">
-								<i class="glyphicon glyphicon-user" style="padding: 3px;"></i>
+								<img src="img/user.png" style="width: 20px; height: 20px;">
+								<!-- <i class="glyphicon glyphicon-user" style="padding: 3px; height: 20px;" ></i> -->
 							</button></li>
 					</c:when>
 					<c:otherwise>
