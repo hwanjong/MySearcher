@@ -20,6 +20,9 @@ public class BlogParser extends RequestParser {
 		case NaverBlog:
 			contents = getNaverBlogContents(url);
 			break;
+		case CyworldBlog:
+			contents = getCyworldBlogContents(url);
+			break;
 		default:
 			break;
 		}
@@ -62,6 +65,48 @@ public class BlogParser extends RequestParser {
 
 				count++;
 
+				list.add(content);
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	private ArrayList<SubContents> getCyworldBlogContents(String url) {
+		ArrayList<SubContents> list = new ArrayList<SubContents>();
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).timeout(5000).get();
+
+			String TitleLink, Press;
+			Elements Results, TitleName, Content;
+
+			Results = doc.select("ul.type-mp li dl");
+			if (Results == null)
+				return list;
+
+			for (Element e : Results) {
+				SubContents content = new SubContents();
+
+				TitleLink = e.select("dt a").attr("href");
+				TitleName = e.select("dt a");
+				Content = e.getElementsByClass("search-content");
+				Press = e.select("a.url").attr("href");
+
+				String str = TitleLink;
+		        if(str != "" && str != " ")	content.setLinkURL(str);
+		        
+		    	str = TitleName.text().trim();
+		        if(str != "" && str != " ") content.setTitle(str);
+		        
+		        str = Content.text().trim();
+		        if(str != "" && str != " ")	content.setSummary(str);
+		        
+		        str = Press;
+		        if(str != "" && str != " ")	content.setReference(str);   
+		        
 				list.add(content);
 			}
 		} catch (IOException e1) {
