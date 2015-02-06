@@ -92,7 +92,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="main.ap"><img
-				src="img/head_logo.png" style="width: 60px;"></a>
+				src="img/head_logo.png" style="width: 100px;"></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
