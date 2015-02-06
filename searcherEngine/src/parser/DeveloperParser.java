@@ -50,8 +50,7 @@ public class DeveloperParser extends RequestParser {
 				SubContents content = new SubContents();
 				sub = e.select("div.result-link > span > a").first();
 				if (sub != null)
-					content.setLinkURL("http://stackoverflow.com"
-							+ sub.attr("href"));
+					content.setLinkURL("http://stackoverflow.com" + sub.attr("href"));
 
 				sub = e.select("div.excerpt").first();
 				if (sub != null)
