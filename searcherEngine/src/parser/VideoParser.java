@@ -66,9 +66,12 @@ public class VideoParser extends RequestParser {
 					content.setTitle(sub.text());
 
 				subs = e.select("ul.yt-lockup-meta-info > li");
-				if (subs != null)
-					content.setUploadTime(subs.get(0).text() + " · " + subs.get(1).text());
-
+				if (subs != null) {
+					if(subs.size() == 2)
+						content.setUploadTime(subs.get(0).text() + " · " + subs.get(1).text());
+					else if(subs.size() == 1)
+						content.setUploadTime(subs.get(0).text());
+				}
 				sub = e.select(
 						"div.yt-lockup-description.yt-ui-ellipsis.yt-ui-ellipsis-2")
 						.first();

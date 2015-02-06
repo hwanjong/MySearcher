@@ -126,8 +126,9 @@ public class DeveloperParser extends RequestParser {
 		Document source = null;
 		try {
 			source = Jsoup.connect(url).get();
-			Elements eLists = source.select("div.qa-q-list > qa-q-list-item");
-
+			Elements eLists = source.select("div.qa-part-q-list > form > div.qa-q-list > div");
+			System.out.println("size:" + eLists.size());
+			
 			Element sub = null;
 			Elements subs = null;
 			for (Element e : eLists) {
@@ -137,6 +138,8 @@ public class DeveloperParser extends RequestParser {
 				if (sub != null) {
 					content.setTitle(sub.text());
 					content.setLinkURL("http://www.masterqna.com/android/" + sub.attr("href"));
+					System.out.println(content.getTitle());
+					System.out.println(content.getLinkURL());
 				}
 				
 				subs = e.select("ul.dqa-q-item-tag-list > li");
@@ -144,12 +147,14 @@ public class DeveloperParser extends RequestParser {
 					for(Element e1 : subs) {
 						content.setCatagoryTag(content.getCatagoryTag() + e1.select("a.qa-tag-link").text());
 					}
+					System.out.println(content.getCatagoryTag());
 				}
 				
 				sub = e.select("span.qa-q-item-when-data").first();
-				if (sub != null)
+				if (sub != null) {
 					content.setUploadTime(sub.text());
-					
+					System.out.println(content.getUploadTime());
+				}
 				contentsList.add(content);
 			}
 		} catch (Exception e) {

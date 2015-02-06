@@ -93,6 +93,9 @@ public abstract class RequestParser {
 				e.printStackTrace();
 			}
 			break;
+		case AndroidPub:
+			requestUrl.append("http://www.masterqna.com/android/search?q=" + param);
+			break;
 		default:
 			break;
 		}
