@@ -64,7 +64,6 @@ $(document).ready(function() {
 									src="${contents.imgURL }" height="100px;" style="margin: 1px;"></a>
 							</c:when>
 							<c:otherwise>
-
 								<div class="alert alert-success">
 									<h4>
 										<a target="_blank" href="${contents.linkURL }">${contents.title}</a>
@@ -79,7 +78,7 @@ $(document).ready(function() {
 										</c:if>
 									</div>
 									<div class="sammary"
-										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top;">
+										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top; word-wrap:break-word;">
 										${contents.summary }<br /> ${contents.catagoryTag }
 										${contents.uploadTime}
 									</div>
