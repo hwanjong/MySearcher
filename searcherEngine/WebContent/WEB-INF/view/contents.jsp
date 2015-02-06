@@ -64,9 +64,10 @@ $(document).ready(function() {
 									src="${contents.imgURL }" height="100px;" style="margin: 1px;"></a>
 							</c:when>
 							<c:otherwise>
+
 								<div class="alert alert-success">
-									<h4>
-										<a target="_blank" href="${contents.linkURL }">${contents.title}</a>
+									<h4 style="font-family: Arial, Helvetica, sans-serif;">
+										<a target="_blank" href="${contents.linkURL }"><b style="font-size: 15px">${contents.title}</b></a>
 									</h4>
 									<div class="img"
 										style="display: inline-block; width: ${contents.imgURL == null?'2%':'32%'};">
@@ -78,9 +79,9 @@ $(document).ready(function() {
 										</c:if>
 									</div>
 									<div class="sammary"
-										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top; word-wrap:break-word;">
-										${contents.summary }<br /> ${contents.catagoryTag }
-										${contents.uploadTime}
+										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top; color: black; font-size: 12px; overflow:hidden; word-wrap:break-word;">
+										${contents.summary }<br /><br /> <p style="color: gray">${contents.catagoryTag }${contents.uploadTime}</p>
+						                
 									</div>
 								</div>
 							</c:otherwise>
