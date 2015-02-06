@@ -44,10 +44,6 @@ nav ul li{
 	overflow: auto;
 	padding: 5px;
 }
-.alert.alert-success {
-	background-color: black;
-}
-
 #categoryBox {
 	position: fixed;
 	z-index:2;
