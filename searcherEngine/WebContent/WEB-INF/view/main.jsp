@@ -6,10 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#mainLogo").attr("src","img/main_logo_"+parseInt(Math.random()*3)+".png");
+});
+</script>
+
 </head>
 <body>
 	<div id="main" style="text-align: center;">
-		<img src="img/main_logo_1.png" style="width: 35%; margin-bottom: 20px;">
+		<img id="mainLogo" src="" style="width: 35%; margin-bottom: 20px;">
 		<form action="searchRequest.ap" method="post" class="form-inline"
 			role="form">
 			<div class="form-group" style="width: 30%">
