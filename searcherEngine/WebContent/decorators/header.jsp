@@ -147,7 +147,8 @@
 
 						<li><button type="button" id="logout"
 								class="btn btn-default navbar-btn">
-								<i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i>
+								<!-- <i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i> -->
+								<img src="img/logout.png" style="width: 20px;">
 							</button></li>
 					</c:otherwise>
 				</c:choose>

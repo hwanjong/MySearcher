@@ -110,7 +110,7 @@
 					<i class="glyphicon glyphicon-info-sign" style="padding: 3px;"></i>
 				</button>
 				<button type="button" id="logout" class="btn btn-default">
-					<i class="glyphicon glyphicon-log-out" style="padding: 3px;"></i>
+					<img src="img/logout.png">
 				</button>
 			</c:otherwise>
 		</c:choose>
