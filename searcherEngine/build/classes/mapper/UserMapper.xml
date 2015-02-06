@@ -47,5 +47,9 @@
 		select
 		cur_page from user where user_id=#{userId}
 	</select>
+	
+	<update id="changePage" parameterType="User">
+		update user set cur_page = #{curPage} where user_id=#{userId}
+	</update>
 
 </mapper>

@@ -8,6 +8,23 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	$("#prev").click(function(){
+		var curPage='${model.pageNum}';
+		curPage--;
+		if(curPage==0) curPage=5;
+		$("#changePage").val(curPage);
+		$("#headSearch").submit();
+		showLoading();
+	});
+	$("#next").click(function(){
+		var curPage='${model.pageNum}';
+		curPage++;
+		if(curPage==6) curPage=1;
+		$("#changePage").val(curPage);
+		$("#headSearch").submit();
+		showLoading();
+	});
+	
 	$("#prev").hover(
 		function(){
 			$(this).attr("src","img/prev2.png");

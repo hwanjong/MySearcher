@@ -23,5 +23,6 @@ public interface UserMapper {
 //	ArrayList<String> getLikeUser(int shopNum);
 //	void insertRandomShopUser(User user);
 	void addCategory(@Param("userId") String userId, @Param("category")String category, @Param("curPage")int curPage);
+	void changePage(User user);
 	
 }

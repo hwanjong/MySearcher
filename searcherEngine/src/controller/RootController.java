@@ -27,12 +27,21 @@ public class RootController {
 	@Mapping(url="/searchRequest.ap",method="post")
 	ModelView getResult(HttpServletRequest request,HttpServletResponse response){
 		ModelView mv = new ModelView("/contents");
-		User user = (User) request.getSession().getAttribute("user");
-		String param = request.getParameter("param");
-		
-		ParsingManager parsingManager = new ParsingManager();
-		if(user==null) user=new User("default");
 		UserDAO userDAO = new UserDAO();
+		User user = (User) request.getSession().getAttribute("user");
+		if(user==null) user=new User("default","방문자");
+		
+		String param = request.getParameter("param");
+		String changePage = request.getParameter("changePage");
+		
+		
+		if(changePage!=null){//페이지변경요청
+			user.setCurPage(changePage);
+			userDAO.changePage(user);
+		}
+		ParsingManager parsingManager = new ParsingManager();
+		
+		
 		ArrayList<Category> curPageCategoryList =  userDAO.getCurPageCategory(user);
 		
 		for(Category category : curPageCategoryList){

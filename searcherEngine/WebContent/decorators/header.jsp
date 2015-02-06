@@ -66,19 +66,28 @@
 				var id = e.target.id;
 				var url = e.target.src;
 				$("#container").append('<img src="'+url+'">');
-				$("#ajaxLoading").show();
+				showLoading();
 
 				$.post("/searcherEngine/addCategory.ap", {
 					category : id,
 				}, function(data) {
 					alert("추가성공");
 					var result = '${model.result}';
-					$("#ajaxLoading").hide();
+					hideLoading();
 				});
 			}
 
 		});
 	});
+	function showLoading() {
+		$("#ajaxLoading").show();
+		$('body').css('opacity', '0.5');
+	};
+	function hideLoading() {
+		$("#ajaxLoading").hide();
+		$('body').css('opacity', '1');
+	};
+	
 </script>
 </head>
 <body>
@@ -98,10 +107,11 @@
 			<c:if test="${pageId!='/main.ap'}">
 				<a class="navbar-brand" href="main.ap"><img
 					src="img/head_logo.png" style="width: 100px;"></a>
-				<form action="searchRequest.ap" method="post"
+				<form id="headSearch" action="searchRequest.ap" method="post"
 					class="navbar-form navbar-left" role="search">
 					<input type="text" class="form-control" placeholder="Search"
 						name="param" style="width: 350px;" value="${model.param}">
+					<input type="text" id="changePage" name="changePage" style="display: none;">
 
 					<button type="submit" class="btn btn-default">
 						<i class="glyphicon glyphicon-search"></i>
@@ -110,8 +120,7 @@
 			</c:if>
 
 			<ul class="nav navbar-nav navbar-right">
-				<c:if test="${user != null}">
-					<li><a href="#">'${user.name }' 님</a></li>
+					<li><a href="#">'${user.name ==null?'방문자': user.name}' 님</a></li>
 					<c:if test="${pageId!='/main.ap'}">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">현재페이지 :${model.pageNum }/5</a>
@@ -123,10 +132,6 @@
 								<li><a href="#">5</a></li>
 							</ul></li>
 					</c:if>
-				</c:if>
-				<c:if test="${empty user}">
-					<li><a href="#">'방문자' 님</a></li>
-				</c:if>
 				<c:if test="${pageId!='/main.ap'}">
 				<li>
 					<button type="button" id="category"
