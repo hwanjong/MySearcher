@@ -20,6 +20,9 @@ public class BlogParser extends RequestParser {
 		case NaverBlog:
 			contents = getNaverBlogContents(url);
 			break;
+		case CyworldBlog:
+			contents = getCyworldBlogContents(url);
+			break;
 		default:
 			break;
 		}
@@ -32,9 +35,8 @@ public class BlogParser extends RequestParser {
 		try {
 			doc = Jsoup.connect(url).timeout(5000).get();
 
-			Elements Results, ImageLink;
 			String TitleLink;
-			Elements TitleName, Press, Content;
+			Elements Results, TitleName, Press, Content, Date;
 
 			Results = doc.select("ul.search_list li");
 			if (Results == null)
@@ -44,17 +46,13 @@ public class BlogParser extends RequestParser {
 			for (Element e : Results) {
 				SubContents content = new SubContents();
 
-				ImageLink = e.getElementsByClass("thumb");
 				TitleLink = e.select("h5 a").attr("href");
 				TitleName = doc.select("ul.search_list li h5");
 				Content = doc.getElementsByClass("list_content");
+				Date = doc.getElementsByClass("Date");
 				Press = doc.getElementsByClass("category");
 
-				String str = ImageLink.attr("src");
-		        str = str.split("jpg")[0];
-		        if(str != "" && str != " ")   content.setImgURL(str + "jpg");
-		    	
-		    	str = TitleName.get(count).text().trim();
+		    	String str = TitleName.get(count).text().trim();
 		        if(str != "" && str != " ") content.setTitle(str);
 		        
 		        str = TitleLink;
@@ -65,9 +63,58 @@ public class BlogParser extends RequestParser {
 		        
 		        str = Content.get(count).text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
+		        
+		        str = Date.get(count).text().trim();
+		        if(str != "" && str != " ")	content.setUploadTime(str);
 
 				count++;
 
+				list.add(content);
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	private ArrayList<SubContents> getCyworldBlogContents(String url) {
+		ArrayList<SubContents> list = new ArrayList<SubContents>();
+		Document doc = null;
+		try {
+			doc = Jsoup.connect(url).timeout(5000).get();
+
+			String TitleLink, Press;
+			Elements Results, TitleName, Content, Date;
+
+			Results = doc.select("ul.type-mp li dl");
+			if (Results == null)
+				return list;
+
+			for (Element e : Results) {
+				SubContents content = new SubContents();
+
+				TitleLink = e.select("dt a").attr("href");
+				TitleName = e.select("dt a");
+				Content = e.select("dd.search-content");
+				Date = e.select("dd.text-inline");
+				Press = e.select("a.url").attr("href");
+
+				String str = TitleLink;
+		        if(str != "" && str != " ")	content.setLinkURL(str);
+		        
+		    	str = TitleName.text().trim();
+		        if(str != "" && str != " ") content.setTitle(str);
+		        
+		        str = Date.text().trim();
+		        if(str != "" && str != " ")	content.setUploadTime(str);
+		        
+		        str = Content.text().trim();
+		        if(str != "" && str != " ")	content.setSummary(str);
+		        
+		        str = Press;
+		        if(str != "" && str != " ")	content.setReference(str);   
+		        
 				list.add(content);
 			}
 		} catch (IOException e1) {
