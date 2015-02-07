@@ -59,7 +59,7 @@ public class BlogParser extends RequestParser {
 		        if(str != "" && str != " ")	content.setLinkURL(str);
 		        
 		        str = Press.get(count).text().trim();
-		        if(str != "" && str != " ")	content.setReference(str);
+		        if(str != "" && str != " ")	content.setCatagoryTag(str);
 		        
 		        str = Content.get(count).text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
@@ -85,7 +85,7 @@ public class BlogParser extends RequestParser {
 			doc = Jsoup.connect(url).get();
 			if(doc.select("div.error_wrap").text().trim() != null) 
 			{
-				System.out.println("사이트 자체 오류");
+				System.out.println("재업로드");
 				doc = Jsoup.connect(url).get();
 			}
 
@@ -117,8 +117,8 @@ public class BlogParser extends RequestParser {
 		        str = Content.text().trim();
 		        if(str != "" && str != " ")	content.setSummary(str);
 		        
-		        str = Press;
-		        if(str != "" && str != " ")	content.setReference(str);   
+		        str = Press.split("com/")[1];
+		        if(str != "" && str != " ")	content.setCatagoryTag(str);   
 		        
 				list.add(content);
 			}

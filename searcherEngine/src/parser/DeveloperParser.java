@@ -69,7 +69,6 @@ public class DeveloperParser extends RequestParser {
 					}
 					subs = null;
 				}
-
 				contentsList.add(content);
 			}
 		} catch (Exception e) {
@@ -88,11 +87,11 @@ public class DeveloperParser extends RequestParser {
 			Element sub = null;
 			for (Element e : eLists) {
 				SubContents content = new SubContents();
+				
 				sub = e.select("div.repo-list-stats").first();
 				if (sub != null) {
 					content.setLanguage(sub.text());
 				}
-
 				sub = e.select("h3.repo-list-name > a").first();
 				if (sub != null) {
 					content.setTitle(sub.text());
