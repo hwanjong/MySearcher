@@ -141,9 +141,9 @@ public class DeveloperParser extends RequestParser {
 				subs = e.select("ul.qa-q-item-tag-list > li.qa-q-item-tag-item");
 				//System.out.println("size:" + subs.size());
 				if (subs != null) {
-					content.setCatagoryTag("");
+					content.setSummary("");
 					for(Element e1 : subs) {
-						content.setCatagoryTag(content.getCatagoryTag() + " " + e1.select("a.qa-tag-link").text());
+						content.setSummary(content.getSummary() + " " + e1.select("a.qa-tag-link").text());
 					}
 					//System.out.println(content.getCatagoryTag());
 				}
