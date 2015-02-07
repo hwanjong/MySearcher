@@ -5,6 +5,7 @@ body {
 	font-family: "Jeju Gothic", "Hanna", "Helvetica Neue", Helvetica, Arial,
 		sans-serif;
 	overflow-x: hidden;
+	font-size: 12px;
 }
 
 nav ul li {
@@ -34,8 +35,6 @@ nav ul li {
 	width: 350px;
 	display: inline-block;
 	margin: 10px 10px;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
 }
 
 .logoContainer {
@@ -45,7 +44,6 @@ nav ul li {
 	border: 1px solid #ccc;
 	border-bottom: 0px;
 	padding: 5px 5px;
-	box-shadow: 0 0 2px #fff inset;
 	border-top-left-radius: 20px 15px;
 	border-top-right-radius: 20px 15px;
 }
@@ -60,11 +58,12 @@ nav ul li {
 .content-box {
 	padding: 15px;
 	margin-bottom: 15px;
-	border: 1px solid transparent;
 	border-radius: 5px;
 	background-color: white;
 }
-
+p{
+	color: gray;
+}
 #categoryBox {
 	position: fixed;
 	z-index: 2;

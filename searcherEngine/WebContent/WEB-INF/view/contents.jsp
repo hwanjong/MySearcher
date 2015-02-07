@@ -59,12 +59,11 @@
 							</c:when>
 							<c:otherwise>
 								<div class="content-box">
-									<h4 style="font-family: Arial, Helvetica, sans-serif;">
-										<a target="_blank" href="${contents.linkURL }"><b
-											style="font-size: 15px">${contents.title}</b></a>
-									</h4>
+									<h5>
+										<a target="_blank" href="${contents.linkURL }"><b>${contents.title}</b></a>
+									</h5>
 									<div class="img"
-										style="display: inline-block; width: ${contents.imgURL == null?'2%':'32%'};">
+										style="display: inline-block; width: ${contents.imgURL == null?'2%':'31%'};">
 										<a target="_blank" href="${contents.linkURL }"><img
 											src="${contents.imgURL }" width="95%"></a>
 										<c:if test="${contents.playTime!=null}">
@@ -73,10 +72,10 @@
 										</c:if>
 									</div>
 									<div class="sammary"
-										style="display: inline-block; width: ${contents.imgURL == null?'98%':'66%'}; vertical-align: top; color: black; font-size: 12px; overflow:hidden; word-wrap:break-word;">
+										style="display: inline-block; width: ${contents.imgURL == null?'98%':'65%'}; vertical-align: top;">
 										${contents.summary }<br /> <br />
-										<p style="color: gray">${contents.catagoryTag } </p>
-										<p align="right" style="color: gray;">${contents.uploadTime} </p>
+										<p>${contents.catagoryTag } </p>
+										<p class="pull-right">${contents.uploadTime} </p>
 
 									</div>
 								</div>
@@ -87,7 +86,7 @@
 				<div class="moreContainer">
 					<h4 class="pull-right">
 						<a target="_blank" href="${category.searchURL }"
-							style="font-size: 14px"> 더보기 >></a>
+							style="font-size: 14px"> 검색결과 더보기 >></a>
 					</h4>
 				</div>
 			</div>

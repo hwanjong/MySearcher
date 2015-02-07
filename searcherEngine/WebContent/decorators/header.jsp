@@ -106,7 +106,7 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<c:if test="${pageId!='/main.ap'}">
 				<a class="navbar-brand" href="main.ap"><img
-					src="img/head_logo.png" style="width: 100px;"></a>
+					src="img/head_logo.png" style="width: 80px;"></a>
 				<form id="headSearch" action="searchRequest.ap" method="post"
 					class="navbar-form navbar-left" role="search">
 					<input type="text" class="form-control" placeholder="Search"
