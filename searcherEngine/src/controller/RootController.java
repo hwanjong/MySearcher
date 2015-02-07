@@ -33,14 +33,13 @@ public class RootController {
 		
 		String param = request.getParameter("param");
 		String changePage = request.getParameter("changePage");
-		
-		
+		if(changePage=="") changePage=null;
 		if(changePage!=null){//페이지변경요청
+			System.out.println("페이지 변경요청 : "+changePage);
 			user.setCurPage(changePage);
 			userDAO.changePage(user);
 		}
 		ParsingManager parsingManager = new ParsingManager();
-		
 		
 		ArrayList<Category> curPageCategoryList =  userDAO.getCurPageCategory(user);
 		
@@ -51,7 +50,6 @@ public class RootController {
 		int pageNum = 0;
 		if(user!=null){
 			pageNum=userDAO.getCurPageNum(user);
-			System.out.println(pageNum);
 		}
 		mv.setModel("param", param);
 		mv.setModel("pageNum",pageNum);
