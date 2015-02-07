@@ -88,7 +88,7 @@ $(document).ready(function() {
 				</div>
 				<div class="moreContainer">
 					<h4 class="pull-right">
-						<a target="_blank" href="${category.searchURL }"> 검색결과 더보기 >></a>
+						<a target="_blank" href="${category.searchURL }" style="font-size: 14px"> 더보기 ▶</a>
 					</h4>
 				</div>
 
