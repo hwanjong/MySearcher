@@ -30,7 +30,7 @@ public class ImageParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).userAgent("Mozlia").get();
+			doc = Jsoup.connect(url).timeout(5000).userAgent("Mozlia").get();
 			Elements ori = doc.select("a");
 
 			Elements img;

@@ -28,7 +28,7 @@ public class DictionaryParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
-			source = Jsoup.connect(url).get();
+			source = Jsoup.connect(url).timeout(5000).get();
 			Elements eLists = source.select("ul.mw-search-results > li");
 
 			Element sub = null;

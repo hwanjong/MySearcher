@@ -32,7 +32,7 @@ public class NewsParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results;
 			String ImageLink, TitleLink;
 			Elements TitleName, Content, Date;
@@ -80,7 +80,7 @@ public class NewsParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			Elements Results; 
 			String ImageLink, TitleLink;
 			Elements TitleName, Content, Date;

@@ -33,7 +33,7 @@ public class BlogParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 
 			String TitleLink;
 			Elements Results, TitleName, Press, Content, Date;
@@ -82,7 +82,7 @@ public class BlogParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
-			doc = Jsoup.connect(url).get();
+			doc = Jsoup.connect(url).timeout(5000).get();
 			if(doc.select("div.error_wrap").text().trim() != null) 
 			{
 				System.out.println("재업로드");
