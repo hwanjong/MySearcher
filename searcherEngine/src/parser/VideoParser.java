@@ -35,8 +35,11 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis() ; 
 			source = Jsoup.connect(url).timeout(5000).get();
-
+			long end = System.currentTimeMillis(); 
+			System.out.println("YouTube: " + (end-start)/1000 +"초");
+			
 			Elements eLists = source.select("ol.item-section > li");
 
 			Element sub = null;
@@ -77,8 +80,9 @@ public class VideoParser extends RequestParser {
 						.first();
 				if (sub != null)
 					content.setSummary(sub.text());
-
-				contentsList.add(content);
+				
+				if (content.getImgURL() != null)
+					contentsList.add(content);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +94,10 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
+			long start = System.currentTimeMillis(); 
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("NaverTVcast: " + (end-start)/1000 +"초");
 			Elements Results;
 			String TitleName, ImageLink, TitleLink,Summary;
 			Elements Press, Time;
@@ -144,8 +151,11 @@ public class VideoParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis(); 
 			source = Jsoup.connect(url).timeout(5000).get();
-
+			long end = System.currentTimeMillis(); 
+			System.out.println("PandoraTV: " + (end-start)/1000 +"초");
+			
 			Elements eLists = source.select("div.group_srch.vdlst_hot > div.srch_list");
 
 			Element sub = null;

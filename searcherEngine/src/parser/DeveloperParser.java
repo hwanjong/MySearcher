@@ -34,7 +34,10 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis(); 
 			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("StackOverFlow: " + (end-start)/1000 +"초");
 			Elements eLists = source.select("div.question-summary.search-result");
 
 			Element sub = null;
@@ -81,7 +84,10 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis();
 			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("GitHub: " + (end-start)/1000 +"초");
 			Elements eLists = source.select("ul.repo-list.js-repo-list > li");
 
 			Element sub = null;
@@ -124,7 +130,10 @@ public class DeveloperParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis();
 			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("AndroidPub: " + (end-start)/1000 +"초");
 			Elements eLists = source.select("div.qa-part-q-list > form > div.qa-q-list > div");
 			
 			Element sub = null;

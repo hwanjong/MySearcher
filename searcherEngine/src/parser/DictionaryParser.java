@@ -28,7 +28,10 @@ public class DictionaryParser extends RequestParser {
 		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
 		Document source = null;
 		try {
+			long start = System.currentTimeMillis(); 
 			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("Wikipedia: " + (end-start)/1000 +"초");
 			Elements eLists = source.select("ul.mw-search-results > li");
 
 			Element sub = null;

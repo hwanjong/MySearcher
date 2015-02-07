@@ -33,8 +33,11 @@ public class BlogParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
+			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).get();
-
+			long end = System.currentTimeMillis(); 
+			System.out.println("NaverBlog: " + (end-start)/1000 +"초");
+			
 			String TitleLink;
 			Elements Results, TitleName, Press, Content, Date;
 
@@ -82,7 +85,11 @@ public class BlogParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
+			long start = System.currentTimeMillis(); 
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("CyworldBlog: " + (end-start)/1000 +"초");
+			
 			if(doc.select("div.error_wrap").text().trim() != null) 
 			{
 				System.out.println("재업로드");
