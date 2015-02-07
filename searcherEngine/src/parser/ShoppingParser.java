@@ -42,7 +42,10 @@ public class ShoppingParser extends RequestParser {
 		Document doc = null;
 
 		try {
+			long start = System.currentTimeMillis(); 
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("Autuion: " + (end-start)/1000 +"초");
 			Element ori = doc.select("div.listing.cmt").first(); // 검색결과 없을 때.
 			if (ori == null)
 				return list;
@@ -107,7 +110,10 @@ public class ShoppingParser extends RequestParser {
 		Document doc = null;
 
 		try {
-			doc = Jsoup.connect(url).timeout(5000).get();
+			long start = System.currentTimeMillis();
+			doc = Jsoup.connect(url).timeout(5000).get();			
+			long end = System.currentTimeMillis(); 
+			System.out.println("ElevenST: " + (end-start)/1000 +"초");
 			// System.out.println(url.toString());
 			Elements original = doc.select("ul.list_type");
 
@@ -173,8 +179,11 @@ public class ShoppingParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 
-		try {
+		try {			
+			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("Coupang: " + (end-start)/1000 +"초");
 			Elements Results;
 			String ImageLink, TitleLink;
 			Elements TitleName, Price, Content;
@@ -228,7 +237,10 @@ public class ShoppingParser extends RequestParser {
 		Document doc = null;
 
 		try {
+			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("Timon: " + (end-start)/1000 +"초");
 			Elements Results;
 			String ImageLink;
 			String TitleLink;

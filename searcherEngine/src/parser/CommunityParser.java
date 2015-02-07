@@ -32,8 +32,11 @@ public class CommunityParser extends RequestParser {
 		Document doc = null;
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		try {
+			long start = System.currentTimeMillis(); 
 			doc = Jsoup.connect(url).timeout(5000).get();
-
+			long end = System.currentTimeMillis(); 
+			System.out.println("NatePann: " + (end-start)/1000 +"초");
+			
 			Elements original = doc.select("ul.s_list");
 			Element dt;
 			Element dd;
@@ -97,7 +100,10 @@ public class CommunityParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 
 		try {
+			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("NaverKin: " + (end-start)/1000 +"초");
 			Elements original = doc.select("li");
 			Elements dd;
 

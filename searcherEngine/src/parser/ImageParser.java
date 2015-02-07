@@ -30,7 +30,10 @@ public class ImageParser extends RequestParser {
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
+			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).userAgent("Mozlia").get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("GoogleImage: " + (end-start)/1000 +"초");
 			Elements ori = doc.select("a");
 
 			Elements img;
