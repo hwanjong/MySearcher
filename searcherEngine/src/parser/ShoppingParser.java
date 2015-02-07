@@ -78,14 +78,17 @@ public class ShoppingParser extends RequestParser {
 
 					// 가격 저장//System.out.println(price.text());
 					content.setPrice(price.text());
+					content.setSummary(price.text());
 
 					if (sell != null) { // 판매자가 이미지 일때와 이름일때 구분.
 						// 판매자 저장//System.out.println(sell.attr("alt"));
 						content.setShopName(sell.attr("alt"));
+						content.setCatagoryTag(sell.attr("alt"));
 					} else {
 
 						// 판매자 저장 //System.out.println(seller.text());
 						content.setShopName(seller.text());
+						content.setCatagoryTag(seller.text());
 					}
 
 					list.add(content);
@@ -137,13 +140,14 @@ public class ShoppingParser extends RequestParser {
 
 					// 가격저장 //System.out.println(price.text());
 					content.setPrice(price.text());
-
+					content.setSummary(price.text());
 					if (seller != null) {
 						temp_sell = seller.select("a").first();
 
 						// 판매자저장( 없을 수도
 						// 있다.)//System.out.println(temp_sell.attr("title"));
 						content.setShopName(temp_sell.attr("title"));
+						content.setCatagoryTag(temp_sell.attr("title"));
 					}
 
 					if (content.getLinkURL().length() != 1) { // 성인인증의 경우 #만
@@ -203,11 +207,11 @@ public class ShoppingParser extends RequestParser {
 				str = Price.text().trim();
 				if (str != "" && str != " ")
 					content.setPrice(str);
-
+					content.setSummary(str);
 				str = Content.text().trim() + "개 구매중";
 				if (str != "" && str != " ")
 					content.setShopName(str);
-
+					content.setCatagoryTag(str);
 				list.add(content);
 			}
 		} catch (IOException e1) {
@@ -259,11 +263,11 @@ public class ShoppingParser extends RequestParser {
 				str = Price.text().trim();
 				if (str != "" && str != " ")
 					content.setPrice(str);
-
+					content.setSummary(str);
 				str = Content.text().trim();
 				if (str != "" && str != " ")
 					content.setShopName(str);
-
+					content.setCatagoryTag(str);
 				list.add(content);
 			}
 		} catch (IOException e1) {
