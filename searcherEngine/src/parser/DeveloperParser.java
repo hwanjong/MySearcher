@@ -59,9 +59,9 @@ public class DeveloperParser extends RequestParser {
 
 				subs = e.select("div.tags.user-tags > a");
 				if (subs != null) {
+					content.setCatagoryTag("");
 					for (Element e1 : subs) {
 						sub = e1.select("a.post-tag").first();
-						content.setCatagoryTag(content.getCatagoryTag());
 						if (sub != null) {
 							content.setCatagoryTag(content.getCatagoryTag()
 									+ " " + sub.text());
@@ -90,7 +90,7 @@ public class DeveloperParser extends RequestParser {
 				
 				sub = e.select("div.repo-list-stats").first();
 				if (sub != null) {
-					content.setLanguage(sub.text());
+					content.setCatagoryTag(sub.text());
 				}
 				sub = e.select("h3.repo-list-name > a").first();
 				if (sub != null) {
@@ -126,7 +126,6 @@ public class DeveloperParser extends RequestParser {
 		try {
 			source = Jsoup.connect(url).timeout(5000).get();
 			Elements eLists = source.select("div.qa-part-q-list > form > div.qa-q-list > div");
-			System.out.println("size:" + eLists.size());
 			
 			Element sub = null;
 			Elements subs = null;
@@ -137,22 +136,21 @@ public class DeveloperParser extends RequestParser {
 				if (sub != null) {
 					content.setTitle(sub.text());
 					content.setLinkURL("http://www.masterqna.com/android/" + sub.attr("href"));
-					System.out.println(content.getTitle());
-					System.out.println(content.getLinkURL());
 				}
 				
-				subs = e.select("ul.dqa-q-item-tag-list > li");
+				subs = e.select("ul.qa-q-item-tag-list > li.qa-q-item-tag-item");
+				//System.out.println("size:" + subs.size());
 				if (subs != null) {
+					content.setCatagoryTag("");
 					for(Element e1 : subs) {
-						content.setCatagoryTag(content.getCatagoryTag() + e1.select("a.qa-tag-link").text());
+						content.setCatagoryTag(content.getCatagoryTag() + " " + e1.select("a.qa-tag-link").text());
 					}
-					System.out.println(content.getCatagoryTag());
+					//System.out.println(content.getCatagoryTag());
 				}
 				
 				sub = e.select("span.qa-q-item-when-data").first();
 				if (sub != null) {
 					content.setUploadTime(sub.text());
-					System.out.println(content.getUploadTime());
 				}
 				contentsList.add(content);
 			}
