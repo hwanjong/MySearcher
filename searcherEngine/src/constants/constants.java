@@ -5,7 +5,7 @@ public class constants {
 		NaverTVcast, YouTube, PandoraTV, 
 		NaverNews, MBCNews,
 		NaverBlog, CyworldBlog,
-		GoogleImage, 
+		GoogleImage, Pixabay, Imagebase,
 		ElevenST, Aution, Timon, Coupang,
 		GitHub, StackOverFlow, AndroidPub,
 		NatePann, NaverKin,
@@ -25,7 +25,7 @@ public class constants {
 		NaverBlog, CyworldBlog;
 	}
 	public enum image{
-		GoogleImage;
+		GoogleImage, Pixabay, Imagebase;
 	}
 	public enum shopping{
 		ElevenST, Aution, Timon, Coupang;

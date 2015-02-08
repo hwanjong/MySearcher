@@ -47,19 +47,24 @@ public abstract class RequestParser {
 			requestUrl.append("http://www.cyworld.com/search/search_blog_post.asp?searchword=" + param + "&page=1");
 			break;
 		case NaverBlog:
-			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			try { param = URLEncoder.encode(param, "UTF-8");	} 
 			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
 			requestUrl.append("http://section.blog.naver.com/sub/SearchBlog.nhn?type=post&option.keyword=" + param);
 			break;
-/*		case GoogleImage:
-			try {	param = URLEncoder.encode(param, "UTF-8");	} 
-			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
-			requestUrl.append("https://www.google.co.kr/search?q=" + param + "&newwindow=1&source=lnms&tbm=isch&sa=X&ei=fZ3LVIWWDM-j8AWRp4LgBg&ved=0CAgQ_AUoAQ&biw=871&bih=808&dpr=0.9");
-			break;*/
 		case GoogleImage:
 			try {	param = URLEncoder.encode(param, "UTF-8");	} 
 			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
 			requestUrl.append("https://www.google.co.kr/search?q=" + param + "&newwindow=1&source=lnms&tbm=isch&sa=X&ei=fZ3LVIWWDM-j8AWRp4LgBg&ved=0CAgQ_AUoAQ&biw=871&bih=808&dpr=0.9");
+			break;
+		case Imagebase:
+			try {	param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+			requestUrl.append("http://imagebase.net/search?q=" + param);
+			break;
+		case Pixabay:
+			try { param = URLEncoder.encode(param, "UTF-8");	} 
+			catch (UnsupportedEncodingException e) { e.printStackTrace(); }
+			requestUrl.append("http://pixabay.com/ko/photos/?q=" + param +"&image_type=&cat=&order=");
 			break;
 		case ElevenST:
 			try { param = URLEncoder.encode(param, "euc-kr"); } 

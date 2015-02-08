@@ -279,6 +279,10 @@
 			<div class="tab-pane fade" id="image">
 				<img class="addCategory" id="GoogleImage"
 					src="img/logo_icon/googleImage.png">
+					<img class="addCategory" id="Imagebase"
+					src="img/logo_icon/Imagebase.png">
+					<img class="addCategory" id="Pixabay"
+					src="img/logo_icon/Pixabay.png">
 			</div>
 			<div class="tab-pane fade" id="shopping">
 				<img class="addCategory" id="ElevenST"
