@@ -1,5 +1,5 @@
 package parser;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
@@ -20,27 +20,35 @@ public class ImageParser extends RequestParser {
 		case GoogleImage:
 			contents = getGoogleImageContents(url);
 			break;
+		case Pixabay:
+			contents = getPixabayContents(url);
+			break;
+		case Imagebase:
+			contents = getImagebaseContents(url);
+			break;
 		default:
 			break;
 		}
 		return contents;
 	}
 
-	private ArrayList<SubContents> getGoogleImageContents(String url) { // 링크, 이미지, 가로, 구글은
+	private ArrayList<SubContents> getGoogleImageContents(String url) { // 링크,
+																		// 이미지,
+																		// 가로,
+																		// 구글은
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
 		try {
 			long start = System.currentTimeMillis();
 			doc = Jsoup.connect(url).timeout(5000).userAgent("Mozlia").get();
-			long end = System.currentTimeMillis(); 
-			System.out.println("GoogleImage: " + (end-start)/1000 +"초");
+			long end = System.currentTimeMillis();
+			System.out.println("GoogleImage: " + (end - start) / 1000 + "초");
 			Elements ori = doc.select("a");
 
 			Elements img;
 			String temp;
 
 			for (Element e : ori) {
-
 				SubContents content = new SubContents();
 
 				String link = new String();
@@ -70,9 +78,82 @@ public class ImageParser extends RequestParser {
 				}
 
 			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	private ArrayList<SubContents> getImagebaseContents(String url) { // 링크, 이미지,
+		// 가로, 구글은
+		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+		Document source = null;
+		try {
+			long start = System.currentTimeMillis();
+			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis();
+			System.out.println("Imagebase: " + (end - start) / 1000 + "초");
+
+			//System.out.println(source.toString());
+			Elements eLists = source.select("ul#g-album-grid.ui-helper-clearfix > li.g-item.g-photo");
+			//System.out.println("size:" + eLists.size());
+			Element sub = null;
+			for (Element e : eLists) {
+				SubContents content = new SubContents();
+				sub = e.select("a").first();
+				if (sub != null) {
+					content.setLinkURL("http://imagebase.net" + sub.attr("href"));
+					//System.out.println(content.getLinkURL());
+				}
+
+				sub = e.select("img.g-thumbnail").first();
+				if (sub != null) {
+					content.setImgURL("http://imagebase.net" + sub.attr("src"));
+					content.setWidthSize(sub.attr("width"));
+				}
+
+				contentsList.add(content);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return contentsList;
+	}
+
+	private ArrayList<SubContents> getPixabayContents(String url) { // 링크, 이미지,
+		// 가로, 구글은
+		ArrayList<SubContents> contentsList = new ArrayList<SubContents>();
+		Document source = null;
+		try {
+			long start = System.currentTimeMillis();
+			source = Jsoup.connect(url).timeout(5000).get();
+			long end = System.currentTimeMillis();
+			System.out.println("image: " + (end - start) / 1000 + "초");
+
+			// System.out.println(source.toString());
+			Elements eLists = source
+					.select("div#photo_grid.flex_grid > div.item");
+			// System.out.println("size:" + eLists.size());
+			Element sub = null;
+			for (Element e : eLists) {
+				SubContents content = new SubContents();
+				sub = e.select("a").first();
+				if (sub != null) {
+					content.setLinkURL("http://pixabay.com" + sub.attr("href"));
+					//System.out.println(content.getLinkURL());
+				}
+
+				sub = e.select("img.preview_img").first();
+				if (sub != null) {
+					content.setImgURL("http://pixabay.com" + sub.attr("src"));
+					content.setWidthSize(sub.attr("data-width"));
+				}
+
+				contentsList.add(content);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return contentsList;
 	}
 }
