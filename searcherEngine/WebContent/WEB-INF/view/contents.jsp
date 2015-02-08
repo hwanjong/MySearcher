@@ -195,6 +195,6 @@ var dragStatus ="none";
 		style="position: fixed; top: 50%; right: 10px; margin-right: 10px; width: 50px;"></a>
 		<img id="tresh" src="img/bin.png" ondragover="allowDropDel(event)" ondragleave="leaveDropDel(event)" ondrop="dropDel(event)"
 		style="position: fixed; bottom:2%; right: 3%; width: 70px;">
-		<img id="addState" src="img/add_state.png" style="display:none; position: fixed; top: 50%; left: 50%; width: 60px;">
+		<img id="addState" src="img/add_state.png" style="display:none; position: fixed; top: 40%; left: 50%; width: 60px;">
 </body>
 </html>

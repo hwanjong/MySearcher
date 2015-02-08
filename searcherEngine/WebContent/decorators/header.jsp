@@ -55,6 +55,19 @@
 			$("#categoryBox").show();
 			$('#myTab a:first').tab('show');
 		});
+		$("#modeTogle").click(function() {
+			if ($("#modeTogle").val() == "보기모드") {
+				$("#modeTogle").val("수정모드");
+				$(".subContainer").each(function() {
+					$(this).css("border","1px groove");
+				});
+			} else {
+				$("#modeTogle").val("보기모드");
+				$(".subContainer").each(function() {
+					$(this).css("border","0px");
+				});
+			}
+		});
 	});
 	function showLoading() {
 		$("#ajaxLoading").show();
@@ -110,6 +123,9 @@
 						</ul></li>
 				</c:if>
 				<c:if test="${pageId!='/main.ap'}">
+					<li><input id="modeTogle" type="button"
+						class="btn btn-default navbar-btn" data-toggle="button"
+						value="보기모드" /></li>
 					<li>
 						<button type="button" id="category"
 							class="btn btn-default navbar-btn">
@@ -224,10 +240,13 @@
 	</div>
 	<!-- /.modal -->
 	<div id="categoryBox">
-		<div id="categoryTitle"><b>카테고리추가</b><button type="button" class="close pull-right"
-			onclick='$("#categoryBox").hide()' style="margin-right: 10px;">×</button></div>
+		<div id="categoryTitle">
+			<b>카테고리추가</b>
+			<button type="button" class="close pull-right"
+				onclick='$("#categoryBox").hide()' style="margin-right: 10px;">×</button>
+		</div>
 
-		
+
 		<ul class="nav nav-tabs" id="myTab" style="text-align: center;">
 			<li style="width: 20%"><a href="#vidio" data-toggle="pill">동영상</a></li>
 			<li style="width: 20%"><a href="#news" data-toggle="pill">뉴스</a></li>
