@@ -38,6 +38,12 @@
 			$(this).attr("src", "img/next.png");
 		});
 	});
+	
+	function changePage(page){
+		$("#changePage").val(page);
+		$("#headSearch").submit();
+		showLoading();
+	}
 </script>
 
 </head>
@@ -45,6 +51,13 @@
 	<a href="#"><img id="prev" class="pull-left" src="img/prev.png"
 		style="position: fixed; top: 50%; margin-left: 10px; width: 50px;"></a>
 	<div id="container">
+	<div id="pageNav" style="text-align: center;">
+	<a href="#" onclick="changePage(1)"><img src="${model.pageNum == 1?'img/circle_f.png':'img/circle_e.png'}"></a>
+	<a href="#" onclick="changePage(2)"><img src="${model.pageNum == 2?'img/circle_f.png':'img/circle_e.png'}"></a>
+	<a href="#" onclick="changePage(3)"><img src="${model.pageNum == 3?'img/circle_f.png':'img/circle_e.png'}"></a>
+	<a href="#" onclick="changePage(4)"><img src="${model.pageNum == 4?'img/circle_f.png':'img/circle_e.png'}"></a>
+	<a href="#" onclick="changePage(5)"><img src="${model.pageNum == 5?'img/circle_f.png':'img/circle_e.png'}"></a>
+	</div>
 		<c:forEach var="category" items="${model.curPageCategoryList}">
 			<div class="subContainer">
 				<div class="logoContainer">

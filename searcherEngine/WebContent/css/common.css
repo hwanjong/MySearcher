@@ -18,7 +18,7 @@ nav ul li {
 	display: inline-block;
 	margin: 10px 20px auto;
 	padding: 20px 40px;
-	width: 1200px;
+	width: 90%;
 	height: 1500px;
 }
 
@@ -63,6 +63,10 @@ nav ul li {
 }
 p{
 	color: gray;
+}
+#pageNav img{
+	width: 20px;
+	margin: 2px 5px;
 }
 #categoryBox {
 	position: fixed;
