@@ -25,7 +25,7 @@ public class ImageParser extends RequestParser {
 		}
 		return contents;
 	}
-
+	
 	private ArrayList<SubContents> getGoogleImageContents(String url) { // 링크, 이미지, 가로, 구글은
 		ArrayList<SubContents> list = new ArrayList<SubContents>();
 		Document doc = null;
@@ -40,7 +40,6 @@ public class ImageParser extends RequestParser {
 			String temp;
 
 			for (Element e : ori) {
-
 				SubContents content = new SubContents();
 
 				String link = new String();
@@ -75,4 +74,52 @@ public class ImageParser extends RequestParser {
 		}
 		return list;
 	}
+/*	private ArrayList<SubContents> getGoogleImageContents(String url) { // 링크, 이미지, 가로, 구글은
+		ArrayList<SubContents> list = new ArrayList<SubContents>();
+		Document doc = null;
+		try {
+			long start = System.currentTimeMillis();
+			doc = Jsoup.connect(url).timeout(5000).userAgent("Mozlia").get();
+			long end = System.currentTimeMillis(); 
+			System.out.println("GoogleImage: " + (end-start)/1000 +"초");
+			Elements ori = doc.select("a");
+
+			Elements img;
+			String temp;
+
+			for (Element e : ori) {
+				SubContents content = new SubContents();
+
+				String link = new String();
+				img = e.select("img");
+
+				if (img.toString().length() != 0) {
+
+					temp = e.attr("href").substring(7);
+					link = temp.split("&sa")[0];
+
+					link = link.replace("%3F", "?").replace("%26", "&")
+							.replace("%3D", "=").replace("%25", "%");
+
+					// 이미지 저장//
+					// System.out.println(img.attr("src"));
+					content.setImgURL(img.attr("src"));
+
+					// 너비 저장//System.out.println(img.attr("width"));
+					content.setWidthSize(img.attr("width"));
+
+					// url 저장//
+					// System.out.println(url);
+					content.setLinkURL(link);
+
+					list.add(content);
+
+				}
+
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return list;
+	}*/
 }
