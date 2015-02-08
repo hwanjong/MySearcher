@@ -23,7 +23,7 @@ create table user_set(
 
 alter table user add cur_page int(1);
 alter table user_set add page_num int(1) not null;
-alter table user_set add set_no int(3) auto_increment primary key;
+alter table catagory add catagory_no int(3) auto_increment primary key;
 alter table catagory drop column catagory_id;
 alter table user_set change catagory_id catagory_name varchar(20);
 
@@ -38,5 +38,8 @@ insert into user_set(user_id,catagory_name,page_num) values('hwan72872','Wikiped
 select catagory.catagory_name, catagory.logo_img from user join user_set on user.cur_page = user_set.page_num join catagory on user_set.catagory_name = catagory.catagory_name where user.user_id='t1';
 select c.catagory_name, c.logo_img from  User u join user_set s on (u.user_id = s.user_id) join catagory c on (s.catagory_name=c.catagory_name) where u.user_id ='hwan7287' and u.cur_page = s.page_num;
 
-
 select cur_page from user where user_id='hwan7287';
+
+update user set cur_page = 1 where user_id='hwan7287';
+
+delete from user_set where user_id='hwan7287' and page_num=4 and catagory_name='CyworldBlog';

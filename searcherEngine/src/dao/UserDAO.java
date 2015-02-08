@@ -82,7 +82,7 @@ public class UserDAO {
 		int curPage= 0;
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			curPage=mapper.getCurPage(user);
+			curPage=Integer.parseInt(user.getCurPage());
 			System.out.println("addCategory curpate:"+curPage);
 			mapper.addCategory(user.getUserId(),category,curPage);
 			session.commit();
@@ -100,6 +100,22 @@ public class UserDAO {
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			mapper.changePage(user);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+
+	public void delCategory(User user, String category) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		String curPage;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			curPage=user.getCurPage();
+			mapper.delCategory(user.getUserId(), category, curPage);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();

@@ -112,6 +112,17 @@ public class RootController {
 		return mv;
 	
 	}
+	@Mapping(url="/delCategory.ap",method="post")
+	ModelView delCategory(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		String category = request.getParameter("category");
+		User user = (User) request.getSession().getAttribute("user");
+		UserDAO userDAO = new UserDAO();
+		userDAO.delCategory(user,category);
+		
+		return mv;
+	
+	}
 	
 	
 	

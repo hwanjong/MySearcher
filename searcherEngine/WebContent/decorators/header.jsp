@@ -45,10 +45,6 @@
 			$("#signup").submit();
 		});
 
-		$("#info").popover().click(function(e) {
-			e.preventDefault();
-		});
-
 		$("#logout").click(function() {
 			window.location.replace("logout.ap");
 		});
@@ -58,25 +54,6 @@
 		$("#category").click(function() {
 			$("#categoryBox").show();
 			$('#myTab a:first').tab('show');
-		});
-		$(".addCategory").click(function(e) {
-			if ('${user}' == '') {
-				alert("설정저장은 로그인후이용가능");
-			} else {
-				var id = e.target.id;
-				var url = e.target.src;
-				$("#container").append('<img src="'+url+'">');
-				showLoading();
-
-				$.post("/searcherEngine/addCategory.ap", {
-					category : id,
-				}, function(data) {
-					alert("추가성공");
-					var result = '${model.result}';
-					hideLoading();
-				});
-			}
-
 		});
 	});
 	function showLoading() {
@@ -247,9 +224,10 @@
 	</div>
 	<!-- /.modal -->
 	<div id="categoryBox">
-		카테고리 추가 박스
-		<button type="button" class="close pull-right"
-			onclick='$("#categoryBox").hide()'>×</button>
+		<div id="categoryTitle"><b>카테고리추가</b><button type="button" class="close pull-right"
+			onclick='$("#categoryBox").hide()' style="margin-right: 10px;">×</button></div>
+
+		
 		<ul class="nav nav-tabs" id="myTab" style="text-align: center;">
 			<li style="width: 20%"><a href="#vidio" data-toggle="pill">동영상</a></li>
 			<li style="width: 20%"><a href="#news" data-toggle="pill">뉴스</a></li>
@@ -262,54 +240,63 @@
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade" id="vidio">
-				<img class="addCategory" id="NaverTVcast"
-					src="img/logo_icon/NaverTVcast.png"> <img class="addCategory"
-					id="YouTube" src="img/logo_icon/YouTube.png"> <img
-					class="addCategory" id="PandoraTV" src="img/logo_icon/Pandora.png">
+				<img id="NaverTVcast" draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/NaverTVcast.png"> <img id="YouTube"
+					draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/YouTube.png"> <img id="PandoraTV"
+					draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/Pandora.png">
 			</div>
 			<div class="tab-pane fade" id="news">
-				<img class="addCategory" id="NaverNews"
-					src="img/logo_icon/naverNews.png"> <img class="addCategory"
-					id="MBCNews" src="img/logo_icon/mbcNews.png">
+				<img id="NaverNews" draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/naverNews.png"> <img id="MBCNews"
+					draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/mbcNews.png">
 			</div>
 			<div class="tab-pane fade" id="blog">
-				<img class="addCategory" id="NaverBlog"
-					src="img/logo_icon/naverBlog.png"> <img class="addCategory"
-					id="CyworldBlog" src="img/logo_icon/CyworldBlog.png">
+				<img id="NaverBlog" draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/naverBlog.png"> <img id="CyworldBlog"
+					draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/CyworldBlog.png">
 			</div>
 			<div class="tab-pane fade" id="image">
-				<img class="addCategory" id="GoogleImage"
-					src="img/logo_icon/googleImage.png"> <img class="addCategory"
-					id="Imagebase" src="img/logo_icon/Imagebase.png"> <img
-					class="addCategory" id="Pixabay" src="img/logo_icon/Pixabay.png">
+				<img id="GoogleImage" draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/googleImage.png"> <img id="Imagebase"
+					draggable="true" ondragstart="dragAdd(event)"
+					src="img/logo_icon/Imagebase.png"> <img draggable="true"
+					ondragstart="dragAdd(event)" id="Pixabay"
+					src="img/logo_icon/Pixabay.png">
 			</div>
 			<div class="tab-pane fade" id="shopping">
-				<img class="addCategory" id="ElevenST"
-					src="img/logo_icon/ElevenST.png"> <img class="addCategory"
-					id="Aution" src="img/logo_icon/Auction.png"><img
-					class="addCategory" id="Timon" src="img/logo_icon/Tmon.png">
-				<img class="addCategory" id="Coupang"
+				<img draggable="true" ondragstart="dragAdd(event)" id="ElevenST"
+					src="img/logo_icon/ElevenST.png"> <img draggable="true"
+					ondragstart="dragAdd(event)" id="Aution"
+					src="img/logo_icon/Auction.png"><img draggable="true"
+					ondragstart="dragAdd(event)" id="Timon"
+					src="img/logo_icon/Tmon.png"> <img draggable="true"
+					ondragstart="dragAdd(event)" id="Coupang"
 					src="img/logo_icon/Coupang.png">
 			</div>
 			<div class="tab-pane fade" id="develop">
-				<img class="addCategory" id="GitHub" src="img/logo_icon/Github.png"><img
-					class="addCategory" id="StackOverFlow"
-					src="img/logo_icon/Stackoverflow.png"><img
-					class="addCategory" id="AndroidPub"
+				<img draggable="true" ondragstart="dragAdd(event)" id="GitHub"
+					src="img/logo_icon/Github.png"><img draggable="true"
+					ondragstart="dragAdd(event)" id="StackOverFlow"
+					src="img/logo_icon/Stackoverflow.png"><img draggable="true"
+					ondragstart="dragAdd(event)" id="AndroidPub"
 					src="img/logo_icon/AndroidPub.png">
 
 			</div>
 			<div class="tab-pane fade" id="community">
-				<img class="addCategory" id="NatePann"
-					src="img/logo_icon/NatePann.png"> <img class="addCategory"
-					id="NaverKin" src="img/logo_icon/naverKin.png">
+				<img draggable="true" ondragstart="dragAdd(event)" id="NatePann"
+					src="img/logo_icon/NatePann.png"> <img draggable="true"
+					ondragstart="dragAdd(event)" id="NaverKin"
+					src="img/logo_icon/naverKin.png">
 			</div>
 			<div class="tab-pane fade" id="dictionary">
-				<img class="addCategory" id="Wikipedia"
+				<img draggable="true" ondragstart="dragAdd(event)" id="Wikipedia"
 					src="img/logo_icon/Wikipedia.png">
 			</div>
 		</div>
-
 	</div>
 	<decorator:body />
 
@@ -317,5 +304,6 @@
 
 <div id="ajaxLoading" style="position: absolute; top: 60%; left: 50%;">
 	<img id="loadingImg" src="img/ajax-loader.gif">
+	<p>처리중..</p>
 </div>
 </html>
