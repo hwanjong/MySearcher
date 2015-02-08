@@ -87,7 +87,6 @@
 		$("#ajaxLoading").hide();
 		$('body').css('opacity', '1');
 	};
-	
 </script>
 </head>
 <body>
@@ -111,7 +110,8 @@
 					class="navbar-form navbar-left" role="search">
 					<input type="text" class="form-control" placeholder="Search"
 						name="param" style="width: 350px;" value="${model.param}">
-					<input type="text" id="changePage" name="changePage" style="display: none;">
+					<input type="text" id="changePage" name="changePage"
+						style="display: none;">
 
 					<button type="submit" class="btn btn-default">
 						<i class="glyphicon glyphicon-search"></i>
@@ -120,26 +120,27 @@
 			</c:if>
 
 			<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">'${user.name ==null?'방문자': user.name}' 님</a></li>
-					<c:if test="${pageId!='/main.ap'}">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">현재페이지 :${model.pageNum }/5</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-							</ul></li>
-					</c:if>
+				<li><a href="#">'${user.name ==null?'방문자': user.name}' 님</a></li>
 				<c:if test="${pageId!='/main.ap'}">
-				<li>
-					<button type="button" id="category"
-						class="btn btn-default navbar-btn">
-						<!-- <i class="glyphicon glyphicon-plus" style="padding: 3px;"></i> -->
-						<img src="img/add_category.png" style="width: 20px; height: 20px;">
-					</button>
-				</li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">현재페이지 :${model.pageNum }/5</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+						</ul></li>
+				</c:if>
+				<c:if test="${pageId!='/main.ap'}">
+					<li>
+						<button type="button" id="category"
+							class="btn btn-default navbar-btn">
+							<!-- <i class="glyphicon glyphicon-plus" style="padding: 3px;"></i> -->
+							<img src="img/add_category.png"
+								style="width: 20px; height: 20px;">
+						</button>
+					</li>
 				</c:if>
 				<c:choose>
 					<c:when test="${empty user}">
@@ -278,11 +279,9 @@
 			</div>
 			<div class="tab-pane fade" id="image">
 				<img class="addCategory" id="GoogleImage"
-					src="img/logo_icon/googleImage.png">
-					<img class="addCategory" id="Imagebase"
-					src="img/logo_icon/Imagebase.png">
-					<img class="addCategory" id="Pixabay"
-					src="img/logo_icon/Pixabay.png">
+					src="img/logo_icon/googleImage.png"> <img class="addCategory"
+					id="Imagebase" src="img/logo_icon/Imagebase.png"> <img
+					class="addCategory" id="Pixabay" src="img/logo_icon/Pixabay.png">
 			</div>
 			<div class="tab-pane fade" id="shopping">
 				<img class="addCategory" id="ElevenST"
