@@ -67,6 +67,7 @@ var dragStatus ="none";
 	}
 	function dropDel(e){
 		e.preventDefault();
+		leaveDropDel(e);
 		if(dragStatus!="del") return;
 		if ('${user}' == '') {
 			alert("설정변경은 로그인후이용가능");
@@ -126,7 +127,7 @@ var dragStatus ="none";
 			category : e.dataTransfer.getData("id"),
 		}, function(data) {
 			alert("test:비동기수신성공");
-			$("#container").append('<div class="subContainer" style="vertical-align: top"><img id="'+addChoice+'" src="'+url+'"></div>');
+			$("#container").append('<div id="'+addChoice+'Div" class="subContainer" style="vertical-align: top"><img id="'+addChoice+'" src="'+url+'" ondragstart="dragDel(event)"></div>');
 			hideLoading();
 		});
 	}

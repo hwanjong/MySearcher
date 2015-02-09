@@ -82,7 +82,7 @@ public class UserDAO {
 		int curPage= 0;
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			curPage=Integer.parseInt(user.getCurPage());
+			curPage=mapper.getCurPage(user);
 			System.out.println("addCategory curpate:"+curPage);
 			mapper.addCategory(user.getUserId(),category,curPage);
 			session.commit();
