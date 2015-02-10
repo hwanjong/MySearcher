@@ -39,7 +39,8 @@ public class DeveloperParser extends RequestParser {
 			long end = System.currentTimeMillis(); 
 			System.out.println("StackOverFlow: " + (end-start)/1000 +"초");
 			Elements eLists = source.select("div.question-summary.search-result");
-
+			if(eLists.isEmpty())
+				eLists = source.select("div.question-summary");
 			Element sub = null;
 			Elements subs = null;
 			for (Element e : eLists) {
