@@ -76,7 +76,7 @@ public class UserDAO {
 		return pageNum;
 	}
 
-	public void addCategory(User user, String category) {
+	public void addCategory(User user, String category,String left,int zIndex) {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 		int curPage= 0;
@@ -84,7 +84,7 @@ public class UserDAO {
 			UserMapper mapper = session.getMapper(UserMapper.class);
 			curPage=mapper.getCurPage(user);
 			System.out.println("addCategory curpate:"+curPage);
-			mapper.addCategory(user.getUserId(),category,curPage);
+			mapper.addCategory(user.getUserId(),category,curPage,left,zIndex);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -111,10 +111,10 @@ public class UserDAO {
 	public void delCategory(User user, String category) {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		String curPage;
+		int curPage;
 		try{
 			UserMapper mapper = session.getMapper(UserMapper.class);
-			curPage=user.getCurPage();
+			curPage=mapper.getCurPage(user);
 			mapper.delCategory(user.getUserId(), category, curPage);
 			session.commit();
 		}catch(Exception e){
@@ -122,6 +122,78 @@ public class UserDAO {
 		}finally{
 			session.close();
 		}
+	}
+
+	public void changePostion(User user, String category, String left,
+			String top) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int curPage;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			curPage=mapper.getCurPage(user);
+			mapper.changePosition(user.getUserId(), category, curPage, left,top);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+	}
+
+	public void upIndex(User user, String curIndex) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int curPage;
+		int changeNo,curNo;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			curPage=mapper.getCurPage(user);
+			curNo=mapper.getIndexNo(user.getUserId(), curPage, Integer.parseInt(curIndex));
+			try {
+				changeNo=mapper.getIndexNo(user.getUserId(),curPage,Integer.parseInt(curIndex)+1);
+				mapper.downIndex(changeNo);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				//changeNo == null
+			}finally{
+				mapper.upIndex(curNo);
+			}
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+	public void downIndex(User user, String curIndex) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int curPage;
+		int changeNo,curNo;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			curPage=mapper.getCurPage(user);
+			curNo=mapper.getIndexNo(user.getUserId(), curPage, Integer.parseInt(curIndex));
+			try {
+				changeNo=mapper.getIndexNo(user.getUserId(),curPage,Integer.parseInt(curIndex)-1);
+				mapper.upIndex(changeNo);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				//changeNo == null
+			}finally{
+				mapper.downIndex(curNo);
+			}
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
 	}
 
 }

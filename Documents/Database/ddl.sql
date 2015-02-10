@@ -43,3 +43,18 @@ select cur_page from user where user_id='hwan7287';
 update user set cur_page = 1 where user_id='hwan7287';
 
 delete from user_set where user_id='hwan7287' and page_num=4 and catagory_name='CyworldBlog';
+select c.catagory_name, c.logo_img, s.left, s.top from User u join user_set
+		s on (u.user_id = s.user_id) join catagory c on
+		(s.catagory_name=c.catagory_name) where u.user_id ='hwan7287' and
+		u.cur_page = s.page_num;
+truncate useruser;
+
+
+update user_set set user_set.left = '40px', top='120px' where user_id='hwan7287' and catagory_name='CyworldBlog' and page_num='1';
+
+insert into user_set(user_id,catagory_name,page_num,user_set.left)
+		values('hwan7287','dfdfdf',4,'240px');
+        
+select set_no from user_set where user_id='hwan7287' and page_num=1 and z_index=4;
+
+update user_set z_index

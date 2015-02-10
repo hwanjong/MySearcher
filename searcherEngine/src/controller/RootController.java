@@ -105,9 +105,22 @@ public class RootController {
 		String category = request.getParameter("category");
 		User user = (User) request.getSession().getAttribute("user");
 		UserDAO userDAO = new UserDAO();
-		if(userDAO.getCurPageCategory(user).size()!=4){
+		ArrayList<Category> categoryList =userDAO.getCurPageCategory(user); 
+		int curSize=categoryList.size();
+		//빈칸찾아서 삽입되기기능
+		boolean zIndexArr[] = new boolean[5];
+		for(Category cate : categoryList){
+			zIndexArr[Integer.parseInt(cate.getzIndex())]=true;
+		}
+		int emptyzIndex;
+		for(emptyzIndex=1;emptyzIndex<5;emptyzIndex++){
+			if(!zIndexArr[emptyzIndex]) break;
+		}
+		
+		String left=Integer.toString(75+360*curSize)+"px";
+		if(curSize!=4){ //자바스크립트에서 막아주지만 한번더 막음
 			System.out.println(category);
-			userDAO.addCategory(user,category);
+			userDAO.addCategory(user,category,left,emptyzIndex);
 		}
 		return mv;
 	
@@ -123,7 +136,34 @@ public class RootController {
 		return mv;
 	
 	}
-	
+	@Mapping(url="/savePosition.ap",method="post")
+	ModelView changePositon(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		User user = (User) request.getSession().getAttribute("user");
+		String category= request.getParameter("categoryDiv");
+		category = category.split("Div")[0];
+		String top= request.getParameter("top");
+		String left= request.getParameter("left");
+		//userNull일경우처리
+		UserDAO userDAO = new UserDAO();
+		userDAO.changePostion(user,category,left,top);
+		return mv;
+	}
+	@Mapping(url="/changeIndex.ap",method="post")
+	ModelView upIndex(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		User user = (User) request.getSession().getAttribute("user");
+		String curIndex= request.getParameter("curIndex");
+		String state = request.getParameter("state");
+		
+		UserDAO userDAO = new UserDAO();
+		if(state.equals("up"))
+			userDAO.upIndex(user,curIndex);
+		else{
+			userDAO.downIndex(user,curIndex);
+		}
+		return mv;
+	}
 	
 	
 //	@SuppressWarnings("unchecked")

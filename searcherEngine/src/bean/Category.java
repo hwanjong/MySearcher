@@ -8,10 +8,11 @@ public class Category implements Serializable{
 	String categoryName;
 	String logImgURL;
 	String searchURL;
-	String positionX;
-	String positionY;
+	String left;
+	String top;
 	String width;
 	String height;
+	String zIndex;
 	
 	ArrayList<SubContents> contentsList;
 	
@@ -33,18 +34,6 @@ public class Category implements Serializable{
 	public void setContentsList(ArrayList<SubContents> contentsList) {
 		this.contentsList = contentsList;
 	}
-	public String getPositionX() {
-		return positionX;
-	}
-	public void setPositionX(String positionX) {
-		this.positionX = positionX;
-	}
-	public String getPositionY() {
-		return positionY;
-	}
-	public void setPositionY(String positionY) {
-		this.positionY = positionY;
-	}
 	public String getWidth() {
 		return width;
 	}
@@ -62,5 +51,23 @@ public class Category implements Serializable{
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public String getLeft() {
+		return left;
+	}
+	public void setLeft(String left) {
+		this.left = left;
+	}
+	public String getTop() {
+		return top;
+	}
+	public void setTop(String top) {
+		this.top = top;
+	}
+	public String getzIndex() {
+		return zIndex;
+	}
+	public void setzIndex(String zIndex) {
+		this.zIndex = zIndex;
 	}
 }

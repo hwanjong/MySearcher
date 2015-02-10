@@ -12,6 +12,7 @@
 	<resultMap type="Category" id="categoryInfo">
 		<id column="catagory_name" property="categoryName" />
 		<id column="logo_img" property="logImgURL" />
+		<id column="z_index" property="zIndex" />
 	</resultMap>
 
 
@@ -22,9 +23,10 @@
 
 	<insert id="addCategory">
 		insert into
-		user_set(user_id,catagory_name,page_num)
-		values(#{userId},#{category},#{curPage})
+		user_set(user_id,catagory_name,page_num,user_set.left,z_index)
+		values(#{userId},#{category},#{curPage},#{left},#{zIndex})
 	</insert>
+
 	<insert id="delCategory">
 		delete from user_set where user_id=#{userId} and
 		page_num=#{curPage} and
@@ -43,8 +45,11 @@
 
 	<select id="getCurPageCategory" parameterType="User" resultType="Category"
 		resultMap="categoryInfo">
-		select c.catagory_name, c.logo_img from User u join user_set
-		s on (u.user_id = s.user_id) join catagory c on
+		select c.catagory_name, c.logo_img, s.left, s.top, s.z_index
+		from User
+		u join user_set
+		s on (u.user_id = s.user_id) join catagory c
+		on
 		(s.catagory_name=c.catagory_name) where u.user_id =#{userId} and
 		u.cur_page = s.page_num
 	</select>
@@ -57,5 +62,23 @@
 		update user set cur_page =
 		#{curPage} where user_id=#{userId}
 	</update>
+
+	<update id="changePosition">
+		update user_set set user_set.left = #{left},
+		top=#{top} where user_id=#{userId} and catagory_name=#{category}
+		and
+		page_num=#{curPage}
+	</update>
+	<select id="getIndexNo" resultType="int">
+		select set_no from user_set
+		where user_id=#{userId} and page_num=#{curPage} and z_index=#{targetIndex}
+	</select>
+	<update id="upIndex">
+		update user_set set z_index = z_index+1 where set_no=#{no}
+	</update>
+	<update id="downIndex">
+		update user_set set z_index = z_index-1 where set_no=#{no}
+	</update>
+
 
 </mapper>

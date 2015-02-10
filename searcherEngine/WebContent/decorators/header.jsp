@@ -21,19 +21,60 @@
 <c:set var="pageId" value="<%=request.getServletPath()%>" />
 <decorator:head />
 <script type="text/javascript">
+var img_L = 0;
+var img_T = 0;
+var targetObj;
+
+function getLeft(o){
+     return parseInt(o.style.left.replace('px', ''));
+}
+function getTop(o){
+     return parseInt(o.style.top.replace('px', ''));
+}
+
+// 이미지 움직이기
+function moveDrag(e){
+     var e_obj = window.event? window.event : e;
+     var dmvx = parseInt(e_obj.clientX + img_L);
+     var dmvy = parseInt(e_obj.clientY + img_T);
+     targetObj.style.left = dmvx +"px";
+     targetObj.style.top = dmvy +"px";
+     return false;
+}
+//드래그 시작
+function startDrag(e, obj){
+     targetObj = obj;
+     var e_obj = window.event? window.event : e;
+     img_L = getLeft(obj) - e_obj.clientX;
+     img_T = getTop(obj) - e_obj.clientY;
+
+     document.onmousemove = moveDrag;
+     document.onmouseup = stopDrag;
+     if(e_obj.preventDefault)e_obj.preventDefault(); 
+}
+
+// 드래그 멈추기
+function stopDrag(){
+	 /* alert(targetObj.style.top+", "+targetObj.style.left); */
+	 var cateId = targetObj.id;
+	 var top =targetObj.style.top;
+	 var left =targetObj.style.left;
+     document.onmousemove = null;
+     document.onmouseup = null;
+     if ('${user}' == '') {
+			alert("설정변경은 로그인후이용가능");
+			return;
+			}
+     showLoading();
+     $.post("savePosition.ap", {
+		categoryDiv : cateId,
+		top : top,
+		left : left
+	}, function(data) {
+		hideLoading();
+	});
+}
 	$(document).ready(function() {
-		/* $("form").submit(function(e) {
-			e.preventDefault(); //폼점송이 두번되지않게 막음
-			$.post("searchRequest.ap", {
-				param : $("#param").val(),
-			}, function(data) {
-				alert("결과수신");
-				var result = '${model.result}';
-				alert(data);
-			});
-		});
-		 */
-		/* $(".popover-content").append('dfdf'); */
 		$("#ajaxLoading").hide();
 		$("#loginModalBtn").click(function() {
 			$("#loginModal").modal("show");
@@ -58,13 +99,22 @@
 		$("#modeTogle").click(function() {
 			if ($("#modeTogle").val() == "보기모드") {
 				$("#modeTogle").val("수정모드");
+				$("#modeImg").attr("src","img/modify_mode.png");
+				$(".zIndex").show();
+				
 				$(".subContainer").each(function() {
-					$(this).css("border","1px groove");
+					$(this).attr("onmousedown","startDrag(event, this)");
+					$(this).css("border","1px dotted");
 				});
 			} else {
 				$("#modeTogle").val("보기모드");
+				$("#modeImg").attr("src","img/view_mode.png");
+				$(".zIndex").hide();
+				
 				$(".subContainer").each(function() {
+					$(this).attr("onmousedown"," ");
 					$(this).css("border","0px");
+				
 				});
 			}
 		});
@@ -77,6 +127,7 @@
 		$("#ajaxLoading").hide();
 		$('body').css('opacity', '1');
 	};
+
 </script>
 </head>
 <body>
@@ -123,9 +174,9 @@
 						</ul></li>
 				</c:if>
 				<c:if test="${pageId!='/main.ap'}">
-					<li><input id="modeTogle" type="button"
+					<li><button id="modeTogle" type="button"
 						class="btn btn-default navbar-btn" data-toggle="button"
-						value="보기모드" /></li>
+						value="보기모드" ><img id="modeImg" src="img/view_mode.png" height="20px;"></button></li>
 					<li>
 						<button type="button" id="category"
 							class="btn btn-default navbar-btn">
@@ -157,6 +208,7 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</nav>
+
 	<!-- Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

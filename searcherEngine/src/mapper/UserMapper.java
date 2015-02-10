@@ -13,8 +13,12 @@ public interface UserMapper {
 	User getUserInfo(User user);
 	ArrayList<Category> getCurPageCategory(User user);
 	int getCurPage(User user);
-	void addCategory(@Param("userId") String userId, @Param("category")String category, @Param("curPage")int curPage);
-	void delCategory(@Param("userId") String userId, @Param("category")String category, @Param("curPage")String curPage);
+	void addCategory(@Param("userId") String userId, @Param("category")String category, @Param("curPage")int curPage,@Param("left")String left,@Param("zIndex")int zIndex);
+	void delCategory(@Param("userId") String userId, @Param("category")String category, @Param("curPage")int curPage);
 	void changePage(User user);
-	
+	void changePosition(@Param("userId")String userId, @Param("category")String category, @Param("curPage")int curPage,
+			@Param("left")String left, @Param("top")String top);
+	int getIndexNo(@Param("userId")String userId, @Param("curPage")int curPage,@Param("targetIndex") int targetIndex);
+	void upIndex(@Param("no")int no);
+	void downIndex(@Param("no")int no);
 }
