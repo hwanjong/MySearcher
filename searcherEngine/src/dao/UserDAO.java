@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import bean.Category;
+import bean.Scrap;
 import bean.User;
 
 
@@ -194,6 +195,68 @@ public class UserDAO {
 			session.close();
 		}
 		
+	}
+
+	public void changeSize(User user, String category, String width,
+			String height) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int curPage;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			curPage=mapper.getCurPage(user);
+			mapper.changeSize(user.getUserId(), category, curPage, width,height);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+
+	public void addScrap(User user, String divId, String divHtml) {
+		
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.addScrap(user.getUserId(), divId, divHtml);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+	}
+
+	public ArrayList<Scrap> getScrapList(User user) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		ArrayList<Scrap> scrapList=null;
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			scrapList= mapper.getScrapList(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return scrapList;
+
+
+	}
+
+	public void delScrap(User user, String divId) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			mapper.delScrap(user.getUserId(), divId);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
 	}
 
 }

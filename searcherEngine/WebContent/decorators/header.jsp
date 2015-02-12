@@ -74,6 +74,18 @@ function stopDrag(){
 		hideLoading();
 	});
 }
+
+function deleteScrap(obj){
+	var id = obj.id;
+	$("#scrapBox").find("#"+id).remove();
+	showLoading();
+	$.post("deleteScrap.ap", {
+		id : id
+	}, function(data) {
+		hideLoading();
+	});
+	
+}
 	$(document).ready(function() {
 		$("#ajaxLoading").hide();
 		$("#loginModalBtn").click(function() {
@@ -94,38 +106,37 @@ function stopDrag(){
 		});
 		$("#category").click(function() {
 			$("#categoryBox").show();
-			$('#myTab a:first').tab('show');
 		});
+		$("#scrapBtn").click(function() {
+			$("#scrapBox").show();
+		});
+		
 		$("#modeTogle").click(function() {
 			if ($("#modeTogle").val() == "보기모드") {
 				$("#modeTogle").val("수정모드");
 				$("#modeImg").attr("src","img/modify_mode.png");
 				$(".zIndex").show();
+				$(".subContainer" ).resizable( "option", "disabled", false );
+				$(".ui-resizable-handle").show();
 				
-				$(".subContainer").each(function() {
-					$(this).attr("onmousedown","startDrag(event, this)");
-					$(this).css("border","1px dotted");
-				});
+				$(".logoContainer").attr("onmousedown","startDrag(event, parentNode)");
+				$(".subContainer").css("border","1px dotted");
 			} else {
 				$("#modeTogle").val("보기모드");
 				$("#modeImg").attr("src","img/view_mode.png");
 				$(".zIndex").hide();
-				
-				$(".subContainer").each(function() {
-					$(this).attr("onmousedown"," ");
-					$(this).css("border","0px");
-				
-				});
+				$(".subContainer" ).resizable( "option", "disabled", true );
+				$(".ui-resizable-handle").hide();
+				$(".logoContainer").attr("onmousedown"," ");
+				$(".subContainer").css("border","0px");
 			}
 		});
 	});
 	function showLoading() {
 		$("#ajaxLoading").show();
-		$('body').css('opacity', '0.5');
 	};
 	function hideLoading() {
 		$("#ajaxLoading").hide();
-		$('body').css('opacity', '1');
 	};
 
 </script>
@@ -172,10 +183,8 @@ function stopDrag(){
 							<li><a href="#">4</a></li>
 							<li><a href="#">5</a></li>
 						</ul></li>
-				</c:if>
-				<c:if test="${pageId!='/main.ap'}">
 					<li><button id="modeTogle" type="button"
-						class="btn btn-default navbar-btn" data-toggle="button"
+						class="btn btn-default navbar-btn"
 						value="보기모드" ><img id="modeImg" src="img/view_mode.png" height="20px;"></button></li>
 					<li>
 						<button type="button" id="category"
@@ -185,6 +194,8 @@ function stopDrag(){
 								style="width: 20px; height: 20px;">
 						</button>
 					</li>
+					<li><button id="scrapBtn" type="button"
+						class="btn btn-default navbar-btn"><img id="modeImg" src="img/scrap.png" height="20px;"></button></li>
 				</c:if>
 				<c:choose>
 					<c:when test="${empty user}">
@@ -292,7 +303,7 @@ function stopDrag(){
 	</div>
 	<!-- /.modal -->
 	<div id="categoryBox">
-		<div id="categoryTitle">
+		<div class="boxTitle">
 			<b>카테고리추가</b>
 			<button type="button" class="close pull-right"
 				onclick='$("#categoryBox").hide()' style="margin-right: 10px;">×</button>
@@ -300,7 +311,7 @@ function stopDrag(){
 
 
 		<ul class="nav nav-tabs" id="myTab" style="text-align: center;">
-			<li style="width: 20%"><a href="#vidio" data-toggle="pill">동영상</a></li>
+			<li style="width: 20%" class="active"><a href="#vidio" data-toggle="pill">동영상</a></li>
 			<li style="width: 20%"><a href="#news" data-toggle="pill">뉴스</a></li>
 			<li style="width: 20%"><a href="#blog" data-toggle="pill">블로그</a></li>
 			<li style="width: 20%"><a href="#image" data-toggle="pill">이미지</a></li>
@@ -310,7 +321,7 @@ function stopDrag(){
 			<li style="width: 20%"><a href="#dictionary" data-toggle="pill">사전</a></li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade" id="vidio">
+			<div class="tab-pane fade active in" id="vidio">
 				<img id="NaverTVcast" draggable="true" ondragstart="dragAdd(event)"
 					src="img/logo_icon/NaverTVcast.png"> <img id="YouTube"
 					draggable="true" ondragstart="dragAdd(event)"
@@ -369,12 +380,24 @@ function stopDrag(){
 			</div>
 		</div>
 	</div>
+	
+	<div id="scrapBox" ondrop="dropScrap(event)" ondragover="allowDropScrap(event)" ondragleave="leaveDropScrap(event)">
+		<div class="boxTitle">
+		<b>스크랩박스</b>
+			<button type="button" class="close pull-right"
+				onclick='$("#scrapBox").hide()' style="margin-right: 10px;">×</button>
+		</div>
+		이곳에 스크랩하세요.
+		<c:forEach var="scrap" items="${model.scrapList}">
+			${scrap.divHtml }
+		</c:forEach>
+	</div>
 	<decorator:body />
 
 </body>
 
-<div id="ajaxLoading" style="position: absolute; top: 60%; left: 50%;">
-	<img id="loadingImg" src="img/ajax-loader.gif">
+<div id="ajaxLoading" style="position: fixed; top: 60%; left: 50%; z-index: 5">
+	<img id="loadingImg" src="img/ajax-loader.gif" >
 	<p>처리중..</p>
 </div>
 </html>

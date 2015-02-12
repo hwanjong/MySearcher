@@ -5,10 +5,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 <script type="text/javascript">
 	var dragStatus = "none";
 	$(document).ready(function() {
+		$(".subContainer").each(function(){
+			var totalWidth=$(this).css("width");
+			totalWidth=totalWidth.split("px")[0];
+			var eachWidth = totalWidth / parseInt(totalWidth/320) -50;
+			$(this).find(".content-box").css("width",eachWidth);
+		});
+		
+		 $(".subContainer" ).resizable({
+			 maxHeight: 800,
+		     maxWidth: 1500,
+		     minHeight: 277,
+		     minWidth: 350,
+		     disabled: true,
+		     stop: function( event, ui ) {
+		    	 
+		    	 var category =ui.element.context.id;
+		    	 var width = ui.size.width;
+		    	 var height = ui.size.height;
+		    	 
+		    	 if ('${user}' == '') return;
+		    	 
+		    	 var totalWidth=$("#"+category).css("width");
+		    	 totalWidth=totalWidth.split("px")[0];
+		    	 var eachWidth = totalWidth / parseInt(totalWidth/320) -50;
+		    	 
+		    	 $("#"+category).find(".content-box").css("width",eachWidth);
+		    	 
+		    	 showLoading();
+		    	 $.post("saveResize.ap", {
+		    		 	categoryDiv : category,
+		    			width : width,
+		    			height : height
+		    		}, function(data) {
+		    			hideLoading();
+		    		});
+		     }
+		 });
+		 $(".ui-resizable-handle").hide();
+		 
 		$("#prev").click(function() {
 			var curPage = '${model.pageNum}';
 			curPage--;
@@ -51,6 +92,57 @@
 		$("#headSearch").submit();
 		showLoading();
 	}
+	function dragScrap(e) {
+		console.log("dragScrap"+e.target.id);
+		dragStatus = "scrap";
+		e.dataTransfer.setData("id", e.target.id);
+	}
+	function allowDropScrap(e) {
+		console.log("allowDropScrap");
+		if (dragStatus != "scrap")
+			return;
+		e.preventDefault();
+		$("#scrapBox").css("background-color", "#BDBDBD");
+	}
+	function leaveDropScrap(e) {
+		console.log("leaveDropScrap");
+		e.preventDefault();
+		$("#scrapBox").css("background-color", "rgb(226, 228, 230)");
+	}
+	
+	function dropScrap(e) {
+		console.log("dropScrap");
+		e.preventDefault();
+		leaveDropScrap(e);
+		var divId = e.dataTransfer.getData("id");
+		
+		if(divId=="") return;
+		
+		if (dragStatus != "scrap")
+			return;
+		if ('${user}' == '') {
+			alert("설정변경은 로그인후이용가능");
+			return;
+		}
+		var newDivId = $("#scrapBox").find(".content-box").last().attr("id");
+		if(newDivId==null){
+			newDivId=1;
+		}
+		else newDivId= parseInt(newDivId)+1;
+		var closeBtnDiv = '<button type="button" class="close pull-right" onclick="deleteScrap(parentNode)" style="margin-bottom: -10px;">×</button>';
+		var divHtml = '<div id="'+newDivId+'" class="content-box">'+closeBtnDiv+$("#container").find("#"+divId).html()+'</div>';
+		$("#scrapBox").append(divHtml);
+		
+		showLoading();
+		$.post("addScrap.ap", {
+			divId : newDivId,
+			divHtml : divHtml
+		}, function(data) {
+			hideLoading();
+		}); 
+	}
+	
+	//델리트 Drag부분
 	function dragDel(e) {
 		console.log("dragDel");
 		dragStatus = "del";
@@ -83,11 +175,11 @@
 		$.post("delCategory.ap", {
 			category : e.dataTransfer.getData("id"),
 		}, function(data) {
-			alert("test:비동기처리완료");
 			hideLoading();
 			$("#container").find("#" + category).remove();
 		});
 	}
+	
 	function dragAdd(e) {
 		dragStatus = "add";
 		e.dataTransfer.setData("id", e.target.id);
@@ -97,8 +189,13 @@
 		if (dragStatus != "add")
 			return;
 		$("#container").css("opacity", "0.4");
-		$("#container").css("background-color", "#BDBDBD");
-		$("#addState").show();
+		if ($("#container").find(".subContainer").length == 4) {
+			$("#container").css("background-color", "#FFA7A7");
+			$("#banState").show();
+		}else{
+			$("#container").css("background-color", "#BDBDBD");
+			$("#addState").show();
+		}
 		e.preventDefault();
 	}
 	function leaveDropAdd(e) {
@@ -106,6 +203,7 @@
 		$("#container").css("opacity", "1");
 		$("#container").css("background-color", "white");
 		$("#addState").hide();
+		$("#banState").hide();
 	}
 
 	function dropAdd(e) {
@@ -120,11 +218,9 @@
 		//추가할때 찾는작업.
 		var addChoice = e.dataTransfer.getData("id");
 		if ($("#container").find(".subContainer").length == 4) {
-			alert("우리 4개까지만 추가합시다;;");
 			return;
 		}
 		if ($("#container").find("#" + addChoice).val() != null) {
-			alert("중복카테고리 추가는안되요");
 			return;
 		}
 
@@ -134,7 +230,6 @@
 			category : e.dataTransfer.getData("id"),
 			},
 		function(data) {
-			alert("test:비동기처리완료");
 			$("#container").append('<div id="'+addChoice+'Div" class="subContainer" style="vertical-align: top; position:static;"><img id="'+ addChoice+ '" src="'+ url+ '" ondragstart="dragDel(event)"></div>');
 			hideLoading();
 		});
@@ -165,7 +260,6 @@
 			state : "up",
 			},
 		function(data) {
-			alert("test:비동기처리완료");
 			hideLoading();
 		});
 		
@@ -195,13 +289,13 @@
 			state : "down",
 			},
 		function(data) {
-			alert("test:비동기처리완료");
 			hideLoading();
 		});
 	}
 </script>
 </head>
 <body>
+<%int contentsNum=0; %>
 	<a href="#"><img id="prev" class="pull-left" src="img/prev.png"
 		style="position: fixed; top: 50%; margin-left: 10px; width: 50px; z-index: 5;"></a>
 	<div id="container" ondrop="dropAdd(event)"
@@ -219,8 +313,8 @@
 				src="${model.pageNum == 5?'img/circle_f.png':'img/circle_e.png'}"></a>
 		</div>
 		<c:forEach var="category" items="${model.curPageCategoryList}">
-			<div class="subContainer ${category.zIndex}" id="${category.categoryName}Div" style="left: ${category.left}; top: ${category.top }; z-index: ${category.zIndex}" onmousedown="" >
-				<div class="logoContainer">
+			<div class="subContainer ${category.zIndex}" id="${category.categoryName}Div" style="position:absolute; width:${category.width }px; height:${category.height }px; left: ${category.left}; top: ${category.top }; z-index: ${category.zIndex};">
+				<div class="logoContainer" onmousedown="" >
 					<img id="${category.categoryName}" class="logoImg" src="${category.logImgURL }"
 						style="width: 140px;" draggable="true"
 						ondragstart="dragDel(event)">
@@ -231,11 +325,13 @@
 					<c:forEach var="contents" items="${category.contentsList}">
 						<c:choose>
 							<c:when test="${contents.widthSize!=null }">
-								<a target="_blank" href="${contents.linkURL }"><img
-									src="${contents.imgURL }" height="100px;" style="margin: 1px;"></a>
+							<div class="imgContentsDiv" id="<%=contentsNum++ %>" style="display: inline-block;  float: left;" draggable="true" ondragstart="dragScrap(event)">
+								<a target="_blank" href="${contents.linkURL }" draggable="false"><img  
+									src="${contents.imgURL }" height="100px;" style="margin: 1px;" draggable="false"></a>
+							</div>
 							</c:when>
 							<c:otherwise>
-								<div class="content-box">
+								<div class="content-box" id="<%=contentsNum++ %>" draggable="true" ondragstart="dragScrap(event)">
 									<h5>
 										<a target="_blank" href="${contents.linkURL }"><b>${contents.title}</b></a>
 									</h5>
@@ -260,8 +356,8 @@
 						</c:choose>
 					</c:forEach>
 				</div>
-				<div class="moreContainer">
-					<h4 class="pull-right">
+				<div class="moreContainer" style="text-align: right; vertical-align: bottom;">
+					<h4 >
 						<a target="_blank" href="${category.searchURL }"
 							style="font-size: 14px"> 검색결과 더보기 >></a>
 					</h4>
@@ -275,6 +371,8 @@
 		ondragleave="leaveDropDel(event)" ondrop="dropDel(event)"
 		style="position: fixed; bottom: 2%; right: 3%; width: 70px; z-index: 5">
 	<img id="addState" src="img/add_state.png"
+		style="display: none; position: fixed; top: 40%; left: 50%; width: 60px;">
+	<img id="banState" src="img/ban_state.png"
 		style="display: none; position: fixed; top: 40%; left: 50%; width: 60px;">
 </body>
 </html>

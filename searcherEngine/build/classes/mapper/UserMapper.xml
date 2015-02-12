@@ -14,6 +14,11 @@
 		<id column="logo_img" property="logImgURL" />
 		<id column="z_index" property="zIndex" />
 	</resultMap>
+	<resultMap type="Scrap" id="scrapMap">
+		<id column="div_html" property="divHtml" />
+		<id column="div_id" property="divId" />
+	</resultMap>
+	
 
 
 	<insert id="insertUser" parameterType="User">
@@ -27,11 +32,11 @@
 		values(#{userId},#{category},#{curPage},#{left},#{zIndex})
 	</insert>
 
-	<insert id="delCategory">
+	<delete id="delCategory">
 		delete from user_set where user_id=#{userId} and
 		page_num=#{curPage} and
 		catagory_name=#{category}
-	</insert>
+	</delete>
 
 	<select id="isUser" parameterType="User" resultType="User"
 		resultMap="userInfo">
@@ -45,12 +50,13 @@
 
 	<select id="getCurPageCategory" parameterType="User" resultType="Category"
 		resultMap="categoryInfo">
-		select c.catagory_name, c.logo_img, s.left, s.top, s.z_index
-		from User
+		select * from User
 		u join user_set
-		s on (u.user_id = s.user_id) join catagory c
+		s on (u.user_id =
+		s.user_id) join catagory c
 		on
-		(s.catagory_name=c.catagory_name) where u.user_id =#{userId} and
+		(s.catagory_name=c.catagory_name) where
+		u.user_id =#{userId} and
 		u.cur_page = s.page_num
 	</select>
 	<select id="getCurPage" parameterType="User" resultType="int">
@@ -69,16 +75,38 @@
 		and
 		page_num=#{curPage}
 	</update>
+	<update id="changeSize">
+		update user_set set width = #{width},
+		height=#{height} where user_id=#{userId} and catagory_name=#{category}
+		and
+		page_num=#{curPage}
+	</update>
+	
 	<select id="getIndexNo" resultType="int">
 		select set_no from user_set
-		where user_id=#{userId} and page_num=#{curPage} and z_index=#{targetIndex}
+		where user_id=#{userId} and page_num=#{curPage} and
+		z_index=#{targetIndex}
 	</select>
 	<update id="upIndex">
-		update user_set set z_index = z_index+1 where set_no=#{no}
+		update user_set set z_index = z_index+1 where
+		set_no=#{no}
 	</update>
 	<update id="downIndex">
-		update user_set set z_index = z_index-1 where set_no=#{no}
+		update user_set set z_index = z_index-1 where
+		set_no=#{no}
 	</update>
+	<insert id="addScrap">
+		insert into scrap(user_id,div_html,div_id) values(#{userId},#{divHtml},#{divId})
+	</insert>
+	
+	<select id="getScrapList" parameterType="User" resultType="Scrap"
+		resultMap="scrapMap">
+		select div_html, div_id from scrap where user_id=#{userId}
+	</select>
+	
+	<delete id="delScrap">
+		delete from scrap where user_id = #{userId} and div_id=#{divId}
+	</delete>
 
 
 </mapper>

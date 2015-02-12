@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import bean.Category;
+import bean.Scrap;
 import bean.User;
 
 public interface UserMapper {
@@ -21,4 +22,9 @@ public interface UserMapper {
 	int getIndexNo(@Param("userId")String userId, @Param("curPage")int curPage,@Param("targetIndex") int targetIndex);
 	void upIndex(@Param("no")int no);
 	void downIndex(@Param("no")int no);
+	void changeSize(@Param("userId")String userId, @Param("category")String category, @Param("curPage")int curPage,
+			@Param("width")String width, @Param("height")String height);
+	void addScrap(@Param("userId")String userId, @Param("divId")String divId, @Param("divHtml")String divHtml);
+	ArrayList<Scrap> getScrapList(User user);
+	void delScrap(@Param("userId")String userId, @Param("divId")String divId);
 }

@@ -31,18 +31,18 @@ nav ul li {
 }
 
 .subContainer {
-	cursor: pointer; 
-	position:absolute;
-	width: 350px;
-	height: 600px;
 	display: inline-block;
 	margin: 10px 10px;
 }
 
 .logoContainer {
-
 }
+.moreContainer{
+	height: 20px;
+}
+
 .logoImg{
+	cursor: pointer; 
 	width: 170px;
 	height: 40px;
 	background: #fff;
@@ -54,6 +54,7 @@ nav ul li {
 }
 
 .contentsContainer {
+	text-align:center;
 	background-color: rgb(226, 228, 230);
 	height:85%;
 	overflow: auto;
@@ -61,8 +62,12 @@ nav ul li {
 }
 
 .content-box {
+	text-align:left;
+	display:inline-block;
+	width:90%;
+	vertical-align:top;
 	padding: 15px;
-	margin-bottom: 15px;
+	margin: 5px;
 	border-radius: 5px;
 	background-color: white;
 }
@@ -79,7 +84,7 @@ p {
 
 #categoryBox {
 	position: fixed;
-	z-index: 5;
+	z-index: 6;
 	right: 5%;
 	top: 10%;
 	width: 450px;
@@ -88,8 +93,21 @@ p {
 	background-color: white;
 	border: 1px solid;
 }
+#scrapBox{
+	text-align: center;
+	position: fixed;
+	z-index: 5;
+	right: 15px;
+	top: 60px;
+	width: 400px;
+	height: 800px;
+	display: none;
+	background-color: rgb(226, 228, 230);
+	border: 1px solid;
+	overflow: auto;
+}
 
-#categoryTitle {
+.boxTitle {
 	background-color: #8C8C8C;
 	color: white;
 	font-size: 22px;

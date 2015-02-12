@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import tool.ParsingManager;
 import bean.Category;
+import bean.Scrap;
 import bean.User;
 import dao.UserDAO;
 @RootURL("/")
@@ -48,12 +49,17 @@ public class RootController {
 			category.setSearchURL(parsingManager.getRequestURL());
 		}
 		int pageNum = 0;
+		ArrayList<Scrap> scrapList =null;
 		if(user!=null){
 			pageNum=userDAO.getCurPageNum(user);
+			//스크랩가져오기
+			scrapList = userDAO.getScrapList(user);
 		}
+		
 		mv.setModel("param", param);
 		mv.setModel("pageNum",pageNum);
 		mv.setModel("curPageCategoryList", curPageCategoryList);
+		mv.setModel("scrapList", scrapList);
 		return mv;
 	}
 	
@@ -144,11 +150,26 @@ public class RootController {
 		category = category.split("Div")[0];
 		String top= request.getParameter("top");
 		String left= request.getParameter("left");
-		//userNull일경우처리
+		//userNull일경우처리는 자바스크립트에서
 		UserDAO userDAO = new UserDAO();
 		userDAO.changePostion(user,category,left,top);
 		return mv;
 	}
+	
+	@Mapping(url="/saveResize.ap",method="post")
+	ModelView changeResize(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		User user = (User) request.getSession().getAttribute("user");
+		String category= request.getParameter("categoryDiv");
+		category = category.split("Div")[0];
+		String width= request.getParameter("width");
+		String height= request.getParameter("height");
+		//userNull일경우처리는 자바스크립트에서
+		UserDAO userDAO = new UserDAO();
+		userDAO.changeSize(user,category,width,height);
+		return mv;
+	}
+	
 	@Mapping(url="/changeIndex.ap",method="post")
 	ModelView upIndex(HttpServletRequest request,HttpServletResponse response){
 		ModelView mv = new ModelView("/ajaxjson");
@@ -164,6 +185,32 @@ public class RootController {
 		}
 		return mv;
 	}
+	
+	@Mapping(url="/addScrap.ap",method="post")
+	ModelView addScrap(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		User user = (User) request.getSession().getAttribute("user");
+		String divId= request.getParameter("divId");
+		String divHtml = request.getParameter("divHtml");
+		
+		UserDAO userDAO = new UserDAO();
+		userDAO.addScrap(user,divId,divHtml);
+		
+		
+		return mv;
+	}
+	@Mapping(url="/deleteScrap.ap",method="post")
+	ModelView delScrap(HttpServletRequest request,HttpServletResponse response){
+		ModelView mv = new ModelView("/ajaxjson");
+		User user = (User) request.getSession().getAttribute("user");
+		String divId= request.getParameter("id");
+		
+		UserDAO userDAO = new UserDAO();
+		userDAO.delScrap(user,divId);
+		
+		return mv;
+	}
+	
 	
 	
 //	@SuppressWarnings("unchecked")

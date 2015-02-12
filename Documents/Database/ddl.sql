@@ -8,7 +8,6 @@ create table catagory(
     catagory_name varchar(20) primary key,
     logo_img varchar(100)
 );
-    
 
 create table user_set(
 	user_id varchar(20),
@@ -20,6 +19,13 @@ create table user_set(
     height int(5),
     constraint usersetting foreign key(user_id) references user(user_id) on delete cascade on update restrict
 );
+create table scrap(
+    user_id varchar(20),
+    div_html varchar(200),
+    scrap_no int(4) auto_increment primary key
+    
+);
+    
 
 alter table user add cur_page int(1);
 alter table user_set add page_num int(1) not null;
@@ -57,4 +63,10 @@ insert into user_set(user_id,catagory_name,page_num,user_set.left)
         
 select set_no from user_set where user_id='hwan7287' and page_num=1 and z_index=4;
 
-update user_set z_index
+update user_set set z_index = z_index+1 where set_no=133;
+
+update user_set set user_set.left = '40px', top='120px' where user_id='hwan7287' and catagory_name='CyworldBlog' and page_num='1';
+
+insert into scrap(user_id,div_html,div_id) values('hwan7287','<div></div>',1);
+select div_html, div_id from scrap where user_id='hwan7287';
+delete from scrap where user_id = 'hwan7287' and div_id=2;
